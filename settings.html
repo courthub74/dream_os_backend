@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dream OS — Settings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-[#05060A] text-white flex">
+  <!-- Sidebar -->
+  <aside class="w-60 bg-white/5 border-r border-white/10 backdrop-blur-xl flex flex-col">
+    <div class="px-5 py-4 flex items-center gap-2 border-b border-white/10">
+      <div class="h-7 w-7 rounded-full bg-gradient-to-br from-[#9B5FFF] to-[#00FFD1]"></div>
+      <div>
+        <div class="text-xs uppercase text-white/40 tracking-[0.18em]">
+          Dream OS
+        </div>
+        <div class="text-[9px] text-white/45">
+          Command Console
+        </div>
+      </div>
+    </div>
+
+    <nav class="flex-1 px-3 py-3 text-xs space-y-1">
+      <a href="dashboard.html" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        Artworks
+      </a>
+      <a href="collections.html" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        Collections
+      </a>
+      <a href="posts-drops.html" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        Posts &amp; Drops
+      </a>
+      <a href="ai_tools.html" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        AI Tools
+      </a>
+      <a href="#" class="block px-3 py-2 rounded-xl bg-[#9B5FFF]/20 text-[#9B5FFF]">
+        Settings
+      </a>
+    </nav>
+
+    <button
+      class="m-3 mb-4 px-3 py-2 text-[10px] rounded-xl bg-white/5 text-white/50 hover:bg-red-500/10 hover:text-red-300 transition"
+    >
+      Logout
+    </button>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 p-6 space-y-6">
+    <!-- Header -->
+    <div class="flex items-baseline justify-between gap-3">
+      <div>
+        <h1 class="text-lg font-semibold text-white">Settings</h1>
+        <p class="text-[12px] text-white/45">
+          Configure identities, chains, marketplaces, AI behavior, and security for Dream OS.
+        </p>
+      </div>
+      <div class="flex gap-2">
+        <button
+          class="px-3 py-1.5 rounded-xl text-[10px] bg-white/5 text-white/70 border border-white/10 hover:bg-white/10"
+        >
+          View Activity Log
+        </button>
+        <button
+          class="px-3 py-1.5 rounded-xl text-[10px] bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1] text-black font-semibold shadow-lg shadow-black/40"
+        >
+          Save All Changes
+        </button>
+      </div>
+    </div>
+
+    <!-- Layout: 2 columns on desktop -->
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)] gap-4">
+      <!-- Left Column: Core settings -->
+      <div class="space-y-4">
+        <!-- Studio Profile -->
+        <section class="rounded-2xl bg-white/5 border border-white/10 px-4 py-4 space-y-3 text-[11px]">
+          <div class="flex items-center justify-between gap-2">
+            <div>
+              <h2 class="text-white/85 text-[12px] mb-1">Studio Profile</h2>
+              <p class="text-white/40 text-[10px]">
+                Controls how Dream Agent appears across dashboards, posts, and public surfaces.
+              </p>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-white/5 text-[9px] text-white/40">
+              Identity
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+            <div>
+              <label class="block text-white/45 mb-1 text-[10px]">Studio Name</label>
+              <input
+                type="text"
+                value="Dream Agent"
+                class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
+                       focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
+              />
+            </div>
+            <div>
+              <label class="block text-white/45 mb-1 text-[10px]">Operator Email</label>
+              <input
+                type="email"
+                value="ops@dreamagent.art"
+                class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
+                       focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
+              />
+            </div>
+            <div>
+              <label class="block text-white/45 mb-1 text-[10px]">Primary URL</label>
+              <input
+                type="text"
+                value="https://dreamagent.art"
+                class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
+                       focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
+              />
+            </div>
+            <div>
+              <label class="block text-white/45 mb-1 text-[10px]">Timezone</label>
+              <select
+                class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
+                       focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
+              >
+                <option>UTC</option>
+                <option selected>America/Detroit</option>
+                <option>Europe/Berlin</option>
+                <option>Asia/Tokyo</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Blockchain & Marketplaces -->
+        <section class="rounded-2xl bg-white/5 border border-white/10 px-4 py-4 space-y-3 text-[11px]">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-white/85 text-[12px] mb-1">Blockchain &amp; Marketplaces</h2>
+              <p class="text-white/40 text-[10px]">
+                Connect wallets and marketplaces for minting, syncing, and verification.
+              </p>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-[#00FFD1]/10 text-[9px] text-[#00FFD1]">
+              On-chain
+            </span>
+          </div>
+
+          <!-- XRPL -->
+          <div class="flex items-center justify-between gap-3 mt-2">
+            <div class="flex flex-col">
+              <span class="text-[10px] text-white/60 mb-0.5">XRPL Wallet</span>
+              <span class="text-[9px] text-white/35">
+                rDre4mAgentXXXXXX... (verified)
+              </span>
+            </div>
+            <div class="flex gap-2">
+              <button class="px-2 py-1 rounded-lg text-[9px] bg-white/5 text-white/70 hover:bg-white/10">
+                Change
+              </button>
+              <button class="px-2 py-1 rounded-lg text-[9px] bg-red-500/10 text-red-300 hover:bg-red-500/20">
+                Disconnect
+              </button>
+            </div>
+          </div>
+
+          <!-- Marketplace connections -->
+          <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <div class="text-[10px] text-white/70">XRP Café</div>
+                <div class="text-[9px] text-white/35">
+                  Connected — syncing listings
+                </div>
+              </div>
+              <button class="px-2 py-1 rounded-lg text-[9px] bg-white/5 text-white/70 hover:bg-white/10">
+                Manage
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <div class="text-[10px] text-white/70">OpenSea</div>
+                <div class="text-[9px] text-white/35">
+                  Not connected
+                </div>
+              </div>
+              <button class="px-2 py-1 rounded-lg text-[9px] bg-[#9B5FFF]/20 text-[#9B5FFF] hover:bg-[#9B5FFF]/30">
+                Connect
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <div class="text-[10px] text-white/70">Tezos / objkt</div>
+                <div class="text-[9px] text-white/35">
+                  Optional multi-chain support
+                </div>
+              </div>
+              <button class="px-2 py-1 rounded-lg text-[9px] bg-white/5 text-white/70 hover:bg-white/10">
+                Configure
+              </button>
+            </div>
+          </div>
+
+          <!-- Default chain -->
+          <div class="mt-3">
+            <label class="block text-[10px] text-white/45 mb-1">
+              Default chain for new mints
+            </label>
+            <select
+              class="w-52 bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
+                     focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
+            >
+              <option selected>XRPL</option>
+              <option>Ethereum</option>
+              <option>Tezos</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- AI & Automation -->
+        <section class="rounded-2xl bg-white/5 border border-white/10 px-4 py-4 space-y-3 text-[11px]">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-white/85 text-[12px] mb-1">AI &amp; Automation</h2>
+              <p class="text-white/40 text-[10px]">
+                Control how aggressively Dream OS assists with pricing, posts, and metadata.
+              </p>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-white/5 text-[9px] text-white/40">
+              Neural Core
+            </span>
+          </div>
+
+          <!-- Toggles -->
+          <div class="space-y-2 mt-1">
+            <label class="flex items-center justify-between gap-3">
+              <div>
+                <div class="text-[10px] text-white/75">Auto-analyze new artworks</div>
+                <div class="text-[9px] text-white/40">
+                  Generate tags, mood, and search embeddings on upload.
+                </div>
+              </div>
+              <button class="toggle-btn data-[on=true]:bg-[#00FFD1]/30 relative w-9 h-5 rounded-full bg-white/10 border border-white/15"
+                      data-on="true">
+                <span class="dot absolute top-[3px] left-[15px] w-3 h-3 rounded-full bg-[#00FFD1] transition-all"></span>
+              </button>
+            </label>
+
+            <label class="flex items-center justify-between gap-3">
+              <div>
+                <div class="text-[10px] text-white/75">Suggest pricing (never auto-apply)</div>
+                <div class="text-[9px] text-white/40">
+                  Recommendations appear in dashboard only.
+                </div>
+              </div>
+              <button class="toggle-btn relative w-9 h-5 rounded-full bg-white/10 border border-white/15"
+                      data-on="false">
+                <span class="dot absolute top-[3px] left-[3px] w-3 h-3 rounded-full bg-white/40 transition-all"></span>
+              </button>
+            </label>
+
+            <label class="flex items-center justify-between gap-3">
+              <div>
+                <div class="text-[10px] text-white/75">Require approval for AI-scheduled posts</div>
+                <div class="text-[9px] text-white/40">
+                  Auto-Post will queue drafts instead of publishing directly.
+                </div>
+              </div>
+              <button class="toggle-btn relative w-9 h-5 rounded-full bg-[#00FFD1]/25 border border-[#00FFD1]/40"
+                      data-on="true">
+                <span class="dot absolute top-[3px] left-[15px] w-3 h-3 rounded-full bg-[#00FFD1] transition-all"></span>
+              </button>
+            </label>
+          </div>
+
+          <!-- Aggressiveness slider (visual only) -->
+          <div class="mt-3">
+            <div class="flex justify-between text-[9px] text-white/45 mb-1">
+              <span>Pricing boldness</span>
+              <span>Moderate</span>
+            </div>
+            <div class="w-full h-1.5 bg-white/10 rounded-full relative">
+              <div class="absolute h-1.5 rounded-full bg-gradient-to-r from-[#00FFD1] to-[#9B5FFF]" style="width:60%;"></div>
+            </div>
+            <div class="flex justify-between text-[8px] text-white/30 mt-1">
+              <span>Conservative</span>
+              <span>Balanced</span>
+              <span>Experimental</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right Column: Security, System, Session -->
+      <div class="space-y-4">
+        <!-- Security -->
+        <section class="rounded-2xl bg-white/5 border border-white/10 px-4 py-4 space-y-3 text-[11px]">
+          <div class="flex items-center justify-between">
+            <h2 class="text-white/85 text-[12px]">Security</h2>
+            <span class="px-2 py-0.5 rounded-full bg-[#00FFD1]/10 text-[9px] text-[#00FFD1]">
+              Secure
+            </span>
+          </div>
+          <p class="text-[9px] text-white/40">
+            Session hardening, 2FA, and admin access to Dream OS.
+          </p>
+
+          <div class="mt-2 space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <div class="text-[10px] text-white/75">Two-Factor Authentication</div>
+                <div class="text-[9px] text-white/40">Protects operator login.</div>
+              </div>
+              <button class="px-2 py-1 rounded-lg text-[9px] bg-white/5 text-[#00FFD1] border border-[#00FFD1]/40 hover:bg-[#00FFD1]/10">
+                Enable
+              </button>
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <div class="text-[10px] text-white/75">Allowed IP / Regions</div>
+                <div class="text-[9px] text-white/40">Optional; restricts sensitive actions.</div>
+              </div>
+              <button class="px-2 py-1 rounded-lg text-[9px] bg-white/5 text-white/70 hover:bg-white/10">
+                Configure
+              </button>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <div class="text-[9px] text-white/45 mb-1">Active Sessions</div>
+            <div class="space-y-1 text-[8px] text-white/40">
+              <div class="flex justify-between">
+                <span>Chrome · Detroit · This device</span>
+                <span class="text-[#00FFD1]">Current</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Safari · iOS · Last seen 2h ago</span>
+                <button class="text-red-300 hover:underline">
+                  Revoke
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- System & Appearance -->
+        <section class="rounded-2xl bg-white/5 border border-white/10 px-4 py-4 space-y-3 text-[11px]">
+          <div class="flex items-center justify-between">
+            <h2 class="text-white/85 text-[12px]">System &amp; Appearance</h2>
+            <span class="px-2 py-0.5 rounded-full bg-white/5 text-[9px] text-white/40">
+              UI
+            </span>
+          </div>
+          <p class="text-[9px] text-white/40">
+            Local preferences for how the Dream OS console behaves.
+          </p>
+
+          <div class="mt-2 space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <div class="text-[10px] text-white/75">Theme</div>
+                <div class="text-[9px] text-white/40">Dark is canonical. Light is… optional.</div>
+              </div>
+              <select
+                class="bg-black/40 border border-white/15 rounded-lg px-2 py-1.5 text-[9px] text-white/80
+                       focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
+              >
+                <option selected>Dream Dark</option>
+                <option>High Contrast</option>
+              </select>
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <div class="text-[10px] text-white/75">Density</div>
+                <div class="text-[9px] text-white/40">Affects table &amp; row spacing.</div>
+              </div>
+              <select
+                class="bg-black/40 border border-white/15 rounded-lg px-2 py-1.5 text-[9px] text-white/80
+                       focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
+              >
+                <option>Comfortable</option>
+                <option selected>Compact</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dangerous / Reset -->
+        <section class="rounded-2xl bg-white/5 border border-red-500/20 px-4 py-4 space-y-3 text-[11px]">
+          <div class="flex items-center justify-between">
+            <h2 class="text-red-300 text-[12px]">Danger Zone</h2>
+          </div>
+          <p class="text-[9px] text-white/40">
+            Actions here can’t be undone. Use with intention.
+          </p>
+          <button
+            class="w-full mt-1 px-3 py-2 rounded-xl text-[9px] bg-red-500/10 text-red-300 hover:bg-red-500/20 border border-red-500/40"
+          >
+            Reset AI Config to Defaults
+          </button>
+          <button
+            class="w-full mt-1 px-3 py-2 rounded-xl text-[9px] bg-transparent text-white/35 hover:bg-white/5 border border-white/10"
+          >
+            Export Full Dream OS Config
+          </button>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Simple visual toggle behavior (no real persistence)
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isOn = btn.dataset.on === 'true';
+        btn.dataset.on = String(!isOn);
+        const dot = btn.querySelector('.dot');
+        if (!dot) return;
+        if (!isOn) {
+          btn.classList.add('bg-[#00FFD1]/25','border-[#00FFD1]/40');
+          dot.style.left = '15px';
+          dot.classList.remove('bg-white/40');
+          dot.classList.add('bg-[#00FFD1]');
+        } else {
+          btn.classList.remove('bg-[#00FFD1]/25','border-[#00FFD1]/40');
+          dot.style.left = '3px';
+          dot.classList.remove('bg-[#00FFD1]');
+          dot.classList.add('bg-white/40');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
