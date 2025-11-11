@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dream OS — Posts & Drops</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-[#05060A] text-white flex">
+  <!-- Sidebar -->
+  <aside class="w-60 bg-white/5 border-r border-white/10 backdrop-blur-xl flex flex-col">
+    <div class="px-5 py-4 flex items-center gap-2 border-b border-white/10">
+      <div class="h-7 w-7 rounded-full bg-gradient-to-br from-[#9B5FFF] to-[#00FFD1]"></div>
+      <div>
+        <div class="text-xs uppercase text-white/40 tracking-[0.18em]">Dream OS</div>
+        <div class="text-[9px] text-white/45">Command Console</div>
+      </div>
+    </div>
+
+    <nav class="flex-1 px-3 py-3 text-xs space-y-1">
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        Artworks
+      </a>
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        Collections
+      </a>
+      <a href="#" class="block px-3 py-2 rounded-xl bg-[#9B5FFF]/20 text-[#9B5FFF]">
+        Posts &amp; Drops
+      </a>
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        AI Tools
+      </a>
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        Settings
+      </a>
+    </nav>
+
+    <button
+      class="m-3 mb-4 px-3 py-2 text-[10px] rounded-xl bg-white/5 text-white/50 hover:bg-red-500/10 hover:text-red-300 transition"
+    >
+      Logout
+    </button>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 p-6">
+    <!-- Header -->
+    <div class="flex items-baseline justify-between gap-3 mb-4">
+      <div>
+        <h1 class="text-lg font-semibold text-white">Posts &amp; Drops</h1>
+        <p class="text-[12px] text-white/45">
+          Schedule releases, announcements, and marketplace drops powered by Dream OS.
+        </p>
+      </div>
+      <div class="flex gap-2">
+        <button
+          class="px-3 py-1.5 rounded-xl text-[11px] bg-white/5 text-white/70 border border-white/10 hover:bg-white/10"
+        >
+          AI Suggest Post
+        </button>
+        <button
+          class="px-3 py-1.5 rounded-xl text-[12px] bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1] text-black font-semibold shadow-lg shadow-black/40"
+        >
+          + New Post / Drop
+        </button>
+      </div>
+    </div>
+
+    <!-- Table Card -->
+    <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
+      <!-- Header row -->
+      <div class="px-3 py-2 border-b border-white/10 flex items-center justify-between text-[12px] text-white/45">
+        <!-- Left group -->
+        <div class="flex items-center flex-1">
+          <div class="w-52">Title</div>
+          <div class="w-20">Type</div>
+          <div class="w-24">Status</div>
+          <div class="w-32">Channel</div>
+          <div class="w-40">Scheduled / Live</div>
+          <div class="w-40">Linked</div>
+        </div>
+        <!-- Right group -->
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <div class="w-8 text-center">AI</div>
+          <div class="w-24 text-right">Actions</div>
+        </div>
+      </div>
+
+      <!-- Row 1: Upcoming Featured Drop -->
+      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[12px] hover:bg-white/[0.03]">
+        <!-- Left -->
+        <div class="flex items-center flex-1">
+          <!-- Title -->
+          <div class="w-52 truncate">
+            <span class="text-white/90">Symbols in Motion — Primary Drop</span>
+            <span class="block text-[10px] text-white/35">
+              Coordinated launch across site + XRPL marketplace
+            </span>
+          </div>
+
+          <!-- Type -->
+          <div class="w-20 text-white/70">
+            Drop
+          </div>
+
+          <!-- Status -->
+          <div class="w-24">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-[#F5C36A]/15 text-[#F5C36A]">
+              Scheduled
+            </span>
+          </div>
+
+          <!-- Channel -->
+          <div class="w-32 text-white/70 truncate">
+            dreamagent.art + XRP Café
+          </div>
+
+          <!-- Scheduled / Live -->
+          <div class="w-40 text-white/60">
+            Goes live <span class="text-[#00FFD1]">2025-11-18 20:00 UTC</span>
+          </div>
+
+          <!-- Linked -->
+          <div class="w-40 text-white/60 truncate">
+            Collection: <span class="text-white/85">Symbols in Motion</span>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <!-- AI -->
+          <div class="w-8 flex justify-center">
+            <svg class="w-4 h-4 text-green-400" viewBox="0 0 24 24" fill="currentColor">
+              <title>Optimized by AI</title>
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
+          </div>
+
+          <!-- Actions -->
+          <div class="relative inline-block text-left w-24 text-right">
+            <button
+              onclick="toggleMenu(event, 'post-menu-1')"
+              class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/75 hover:bg-white/10"
+            >
+              Actions <span class="text-[8px]">▼</span>
+            </button>
+            <div
+              id="post-menu-1"
+              class="hidden absolute right-0 mt-1 w-48 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20"
+            >
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/90 hover:bg-white/5">
+                View Details
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                Edit Schedule
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
+                Post Now
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-red-300 hover:bg-red-500/10">
+                Cancel Drop
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Draft Announcement -->
+      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[12px] hover:bg-white/[0.03]">
+        <!-- Left -->
+        <div class="flex items-center flex-1">
+          <!-- Title -->
+          <div class="w-52 truncate">
+            <span class="text-white/90">Signals &amp; Ascensions — Process Notes</span>
+            <span class="block text-[10px] text-white/35">
+              Longform journal entry for collectors
+            </span>
+          </div>
+
+          <!-- Type -->
+          <div class="w-20 text-white/70">
+            Post
+          </div>
+
+          <!-- Status -->
+          <div class="w-24">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-white/55">
+              Draft
+            </span>
+          </div>
+
+          <!-- Channel -->
+          <div class="w-32 text-white/60 truncate">
+            dreamagent.art /journal
+          </div>
+
+          <!-- Scheduled / Live -->
+          <div class="w-40 text-white/40">
+            Not scheduled
+          </div>
+
+          <!-- Linked -->
+          <div class="w-40 text-white/60 truncate">
+            Collection: <span class="text-white/85">Signals &amp; Ascensions</span>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <!-- AI -->
+          <div class="w-8 flex justify-center">
+            <svg class="w-4 h-4 text-white/30" viewBox="0 0 24 24" fill="currentColor">
+              <title>No AI summary yet</title>
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
+          </div>
+
+          <!-- Actions -->
+          <div class="relative inline-block text-left w-24 text-right">
+            <button
+              onclick="toggleMenu(event, 'post-menu-2')"
+              class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/75 hover:bg-white/10"
+            >
+              Actions <span class="text-[8px]">▼</span>
+            </button>
+            <div
+              id="post-menu-2"
+              class="hidden absolute right-0 mt-1 w-48 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20"
+            >
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/90 hover:bg-white/5">
+                Continue Editing
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
+                AI: Generate Summary &amp; Title
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                Schedule Post
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-red-300 hover:bg-red-500/10">
+                Delete Draft
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: Live Site Update -->
+      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[12px] hover:bg-white/[0.03]">
+        <!-- Left -->
+        <div class="flex items-center flex-1">
+          <!-- Title -->
+          <div class="w-52 truncate">
+            <span class="text-white/90">Industrial Scriptures — New Works Online</span>
+            <span class="block text-[10px] text-white/35">
+              Homepage hero + collection spotlight
+            </span>
+          </div>
+
+          <!-- Type -->
+          <div class="w-20 text-white/70">
+            Post
+          </div>
+
+          <!-- Status -->
+          <div class="w-24">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-[#00FFD1]/15 text-[#00FFD1]">
+              Live
+            </span>
+          </div>
+
+          <!-- Channel -->
+          <div class="w-32 text-white/70 truncate">
+            dreamagent.art homepage
+          </div>
+
+          <!-- Scheduled / Live -->
+          <div class="w-40 text-white/60">
+            Published 2025-10-12 14:03 UTC
+          </div>
+
+          <!-- Linked -->
+          <div class="w-40 text-white/60 truncate">
+            Collection: <span class="text-white/85">Industrial Scriptures</span>
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <!-- AI -->
+          <div class="w-8 flex justify-center">
+            <svg class="w-4 h-4 text-green-400" viewBox="0 0 24 24" fill="currentColor">
+              <title>Performance analyzed</title>
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
+          </div>
+
+          <!-- Actions -->
+          <div class="relative inline-block text-left w-24 text-right">
+            <button
+              onclick="toggleMenu(event, 'post-menu-3')"
+              class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/75 hover:bg-white/10"
+            >
+              Actions <span class="text-[8px]">▼</span>
+            </button>
+            <div
+              id="post-menu-3"
+              class="hidden absolute right-0 mt-1 w-48 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20"
+            >
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/90 hover:bg-white/5">
+                View Post
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                Duplicate as New Post
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
+                View AI Performance Report
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-red-300 hover:bg-red-500/10">
+                Unpublish
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu(event, id) {
+      event.stopPropagation();
+      const menu = document.getElementById(id);
+      const allMenus = document.querySelectorAll("[id^='post-menu-']");
+      allMenus.forEach(m => {
+        if (m !== menu) m.classList.add("hidden");
+      });
+      menu.classList.toggle("hidden");
+    }
+
+    document.addEventListener("click", () => {
+      document
+        .querySelectorAll("[id^='post-menu-']")
+        .forEach(m => m.classList.add("hidden"));
+    });
+  </script>
+</body>
+</html>
