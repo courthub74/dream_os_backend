@@ -19,9 +19,9 @@
 
     <nav class="flex-1 px-3 py-3 text-xs space-y-1">
       <a href="#" class="block px-3 py-2 rounded-xl bg-[#9B5FFF]/20 text-[#9B5FFF]">Artworks</a>
-      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">Collections</a>
-      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">Posts &amp; Drops</a>
-      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">AI Tools</a>
+      <a href="collections.html" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">Collections</a>
+      <a href="posts-drops.html" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">Posts &amp; Drops</a>
+      <a href="ai_tools.html" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">AI Tools</a>
       <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">Settings</a>
     </nav>
 
@@ -73,7 +73,15 @@
           <div class="w-40 text-white/60 truncate">
             <a href="#" class="underline underline-offset-2 decoration-[#00FFD1]/60 hover:text-[#00FFD1]">View on XRP Café</a>
           </div>
-          <div class="w-32 text-white/70 truncate">Symbols in Motion</div>
+          <div class="w-32 text-white/70 truncate flex items-center">
+            <span id="collection-row-1" class="truncate">Symbols in Motion</span>
+            <a href="#" onclick="openCollectionModal(event, 'collection-row-1')" class="ml-2 text-white/60 hover:text-white" aria-label="Edit collection">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4L16.5 3.5z" />
+              </svg>
+            </a>
+          </div>
         </div>
         <div class="flex items-center justify-end gap-3 min-w-[8rem]">
           <div class="w-8 flex justify-center">
@@ -100,18 +108,36 @@
       <!-- Row 2 -->
       <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[12px] hover:bg-white/[0.03]">
         <div class="flex items-center flex-1">
+
+         <!-- Title -->
           <div class="w-40 truncate">
             <span class="text-white/90">Signals &amp; Ascensions #07</span>
             <span class="block text-[10px] text-white/35">/art/signals-ascensions-07</span>
           </div>
+
+          <!-- Status -->
           <div class="w-24">
             <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-white/50">Draft</span>
           </div>
+
+          <!-- Price -->
           <div class="w-24 text-white/40">—</div>
+
+          <!-- Chain -->
           <div class="w-20 text-white/25">—</div>
+
+          <!-- Marketplace -->
           <div class="w-40 text-white/25">Not minted</div>
-          <div class="w-32 text-white/60 truncate">Signals &amp; Ascensions</div>
+
+          <!-- Collection: replaced select with modal-driven link -->
+          <div class="w-32 flex items-center">
+            <!-- <span id="collection-row-2" class="text-white/70 truncate">Select Collection</span> -->
+            <a href="#" id="open-collection-row-2" onclick="openCollectionModal(event, 'collection-row-2')" class="ml-2 text-[#9B5FFF] underline text-[10px]">Select a Collection</a>
+          </div>
+          <!-- <div class="w-32 text-white/60 truncate">Signals &amp; Ascensions</div> -->
         </div>
+
+        <!-- Right Group -->
         <div class="flex items-center justify-end gap-3 min-w-[8rem]">
           <div class="w-8 flex justify-center">
             <button id="process_check-row-2" class="process_check" data-ready="false" aria-label="AI process status">
@@ -147,7 +173,15 @@
           <div class="w-24 text-white/70">450 USD</div>
           <div class="w-20 text-white/25">—</div>
           <div class="w-40 text-white/25">Not minted</div>
-          <div class="w-32 text-white/70 truncate">Industrial Scriptures</div>
+          <div class="w-32 text-white/70 truncate flex items-center">
+            <span id="collection-row-3" class="truncate">Industrial Scriptures</span>
+            <a href="#" onclick="openCollectionModal(event, 'collection-row-3')" class="ml-2 text-white/60 hover:text-white" aria-label="Edit collection">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.5a2.121 2.121 0 113 3L7 19l-4 1 1-4L16.5 3.5z" />
+              </svg>
+            </a>
+          </div>
         </div>
         <div class="flex items-center justify-end gap-3 min-w-[8rem]">
           <div class="w-8 flex justify-center">
@@ -172,6 +206,24 @@
       </div>
     </div>
   </main>
+
+  <!-- Collection selection modal -->
+  <div id="collection-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+    <div class="absolute inset-0 bg-black/60" onclick="closeCollectionModal()"></div>
+    <div class="relative bg-[#0B0C10] rounded-xl w-full max-w-md mx-4 p-4 border border-white/10">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-semibold">Select Collection</h3>
+        <button onclick="closeCollectionModal()" class="text-white/60 hover:text-white text-[14px]">✕</button>
+      </div>
+      <div id="collection-list" class="flex flex-col gap-2 max-h-64 overflow-auto">
+        <!-- populated by JS -->
+      </div>
+      <div class="mt-4 flex justify-end gap-2">
+        <button onclick="closeCollectionModal()" class="px-3 py-1 rounded-xl bg-white/5 text-white/70">Close</button>
+        <button id="save-collection-btn" onclick="saveCollectionSelection()" class="px-3 py-1 rounded-xl bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1] text-black font-semibold">Save</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     function toggleMenu(event, id) {
@@ -216,6 +268,98 @@
     }
 
     updateProcessChecks();
+
+    // --- Collection modal logic ---
+    const defaultCollections = [
+      { id: 'symbols-in-motion', title: 'Symbols in Motion' },
+      { id: 'signals-ascensions', title: 'Signals & Ascensions' },
+      { id: 'industrial-scriptures', title: 'Industrial Scriptures' }
+    ];
+
+    function openCollectionModal(event, targetId) {
+      event && event.preventDefault();
+      const modal = document.getElementById('collection-modal');
+      modal.classList.remove('hidden');
+      modal.dataset.target = targetId;
+      populateCollectionList(defaultCollections);
+    }
+
+    function closeCollectionModal() {
+      const modal = document.getElementById('collection-modal');
+      modal.classList.add('hidden');
+      delete modal.dataset.target;
+    }
+
+    function populateCollectionList(collections) {
+      const list = document.getElementById('collection-list');
+      list.innerHTML = '';
+      collections.forEach(c => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.dataset.id = c.id;
+        btn.id = 'collection-item-' + c.id;
+        btn.className = 'text-left px-3 py-2 rounded-lg hover:bg-white/5 text-white/80 flex items-center justify-between';
+        const label = document.createElement('span');
+        label.textContent = c.title;
+        btn.appendChild(label);
+        const check = document.createElement('span');
+        check.className = 'text-transparent';
+        check.innerHTML = '✓';
+        btn.appendChild(check);
+        btn.onclick = () => chooseCollection(c);
+        list.appendChild(btn);
+      });
+      // clear any previous selection marker
+      const modal = document.getElementById('collection-modal');
+      delete modal.dataset.selected;
+      updateCollectionSelectionUI();
+    }
+
+    function chooseCollection(collection) {
+      const modal = document.getElementById('collection-modal');
+      modal.dataset.selected = collection.id;
+      updateCollectionSelectionUI();
+    }
+
+    function updateCollectionSelectionUI() {
+      const modal = document.getElementById('collection-modal');
+      const selectedId = modal.dataset.selected;
+      document.querySelectorAll('#collection-list button').forEach(b => {
+        const check = b.querySelector('span:last-child');
+        if (b.dataset.id === selectedId) {
+          b.classList.add('bg-[#9B5FFF]/10', 'ring-1', 'ring-[#9B5FFF]');
+          if (check) { check.classList.remove('text-transparent'); check.classList.add('text-[#9B5FFF]'); }
+        } else {
+          b.classList.remove('bg-[#9B5FFF]/10', 'ring-1', 'ring-[#9B5FFF]');
+          if (check) { check.classList.remove('text-[#9B5FFF]'); check.classList.add('text-transparent'); }
+        }
+      });
+    }
+
+    function saveCollectionSelection() {
+      const modal = document.getElementById('collection-modal');
+      const selectedId = modal.dataset.selected;
+      if (!selectedId) {
+        // simple feedback: flash the list background
+        const list = document.getElementById('collection-list');
+        list.classList.add('animate-pulse');
+        setTimeout(() => list.classList.remove('animate-pulse'), 400);
+        return;
+      }
+      const collections = defaultCollections;
+      const chosen = collections.find(c => c.id === selectedId);
+      const targetId = modal.dataset.target;
+      if (targetId && chosen) {
+        const targetSpan = document.getElementById(targetId);
+        if (targetSpan) targetSpan.textContent = chosen.title;
+      }
+      closeCollectionModal();
+    }
+
+    // close with ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeCollectionModal();
+    });
   </script>
 </body>
 </html>
