@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen bg-[#05060A] text-white flex">
-  <!-- Sidebar -->
-  <aside class="w-60 bg-white/5 border-r border-white/10 backdrop-blur-xl flex flex-col">
+<body class="min-h-screen bg-[#05060A] text-white flex" data-section="collections">
+  <!-- DESKTOP SIDEBAR -->
+  <aside class="hidden md:flex w-60 bg-white/5 border-r border-white/10 backdrop-blur-xl flex-col">
     <div class="px-5 py-4 flex items-center gap-2 border-b border-white/10">
       <div class="h-7 w-7 rounded-full bg-gradient-to-br from-[#9B5FFF] to-[#00FFD1]"></div>
       <div>
@@ -16,299 +16,255 @@
         <div class="text-[9px] text-white/45">Command Console</div>
       </div>
     </div>
-
     <nav class="flex-1 px-3 py-3 text-xs space-y-1">
-      <a href="/dashboard" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
-        Artworks
-      </a>
-      <a href="/collections" class="block px-3 py-2 rounded-xl bg-[#9B5FFF]/20 text-[#9B5FFF]">
-        Collections
-      </a>
-      <a href="/posts" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
-        Posts &amp; Drops
-      </a>
-      <a href="/ai-tools" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
-        AI Tools
-      </a>
-      <a href="/settings" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
-        Settings
-      </a>
+      <a href="dashboard.html"   data-nav="artworks"    class="nav-link block px-3 py-2 rounded-xl">Artworks</a>
+      <a href="collections.html" data-nav="collections" class="nav-link block px-3 py-2 rounded-xl">Collections</a>
+      <a href="posts-drops.html" data-nav="posts"       class="nav-link block px-3 py-2 rounded-xl">Posts &amp; Drops</a>
+      <a href="ai_tools.html"    data-nav="ai_tools"    class="nav-link block px-3 py-2 rounded-xl">AI Tools</a>
+      <a href="settings.html"    data-nav="settings"    class="nav-link block px-3 py-2 rounded-xl">Settings</a>
     </nav>
-
-    <button
-      class="m-3 mb-4 px-3 py-2 text-[10px] rounded-xl bg-white/5 text-white/50 hover:bg-red-500/10 hover:text-red-300 transition"
-    >
+    <button class="m-3 mb-4 px-3 py-2 text-[10px] rounded-xl bg-white/5 text-white/50 hover:bg-red-500/10 hover:text-red-300 transition">
       Logout
     </button>
   </aside>
 
-  <!-- Main -->
-  <main class="flex-1 p-6 space-y-4">
-    <!-- Header -->
-    <div class="flex items-baseline justify-between gap-3">
-      <div>
-        <h1 class="text-lg font-semibold text-white">New Collection</h1>
-        <p class="text-[12px] text-white/45">
-          Define a world inside the Dream Agent universe: narrative, artworks, surfaces, and AI behavior.
-        </p>
-      </div>
-      <a
-        href="/collections"
-        class="px-3 py-1.5 rounded-xl text-[10px] bg-white/5 text-white/60 border border-white/10 hover:bg-white/10"
-      >
-        ← Back to Collections
-      </a>
-    </div>
-
-    <!-- Layout -->
-    <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,2.3fr)_minmax(260px,1fr)] gap-4">
-      <!-- LEFT: Identity, narrative, routing -->
-      <section class="rounded-2xl bg-white/5 border border-white/10 px-4 py-4 space-y-4 text-[11px]">
-        <!-- Name & Slug -->
-        <div class="grid grid-cols-1 md:grid-cols-[minmax(0,2fr)_minmax(0,1.6fr)] gap-3">
-          <div>
-            <label class="block text-[10px] text-white/45 mb-1">Collection Name</label>
-            <input
-              type="text"
-              placeholder="Symbols in Motion"
-              class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[11px] text-white/90
-                     focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
-            />
-          </div>
-          <div>
-            <label class="block text-[10px] text-white/45 mb-1">Slug / Path</label>
-            <div class="flex items-center gap-1 text-[9px] text-white/35 mb-0.5">
-              <span>dreamagent.art/collections/</span>
-            </div>
-            <input
-              type="text"
-              placeholder="symbols-in-motion"
-              class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
-                     focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
-            />
-          </div>
-        </div>
-
-        <!-- Description -->
+  <!-- MAIN COLUMN -->
+  <div class="flex-1 flex flex-col">
+    <!-- MOBILE TOP BAR -->
+    <header
+      class="md:hidden w-full flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5 backdrop-blur-xl sticky top-0 z-40">
+      <div class="flex items-center gap-2">
+        <div class="h-7 w-7 rounded-full bg-gradient-to-br from-[#9B5FFF] to-[#00FFD1]"></div>
         <div>
-          <label class="block text-[10px] text-white/45 mb-1">Curatorial Statement</label>
-          <textarea
-            rows="4"
-            placeholder="Describe the logic of this collection: themes, era, palette, recurring forms, narrative thread."
-            class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
-                   focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1] resize-none"
-          ></textarea>
-          <p class="mt-1 text-[8px] text-white/35">
-            This text appears on the public collection page and informs AI copy &amp; recommendations.
+          <div class="text-[10px] uppercase text-white/40 tracking-[0.18em]">Dream OS</div>
+          <div class="text-[8px] text-white/45">Command Console</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="hidden xs:inline text-[8px] text-white/45 uppercase tracking-[0.14em]">
+          New Collection
+        </span>
+        <button
+          class="h-8 w-8 flex items-center justify-center rounded-full border border-white/20 bg-black/40 hover:bg-black/70 hover:border-[#9B5FFF] transition"
+          aria-label="Open menu"
+          onclick="toggleNavMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.6">
+            <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- MOBILE NAV OVERLAY & PANEL -->
+    <div id="nav-overlay"
+         class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-200 z-30 md:hidden"
+         onclick="closeNavMenu()"></div>
+
+    <nav id="nav-panel"
+         class="fixed top-3 right-3 mt-9 w-44 rounded-2xl bg-[#05060A]/98 border border-white/15 shadow-2xl px-3 py-2
+                space-y-1 text-[10px] opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50 md:hidden">
+      <div class="px-1 py-1 text-[8px] uppercase tracking-[0.16em] text-white/35">Navigation</div>
+      <a href="dashboard.html"   data-nav="artworks"    class="nav-link block px-2 py-1.5 rounded-xl">Artworks</a>
+      <a href="collections.html" data-nav="collections" class="nav-link block px-2 py-1.5 rounded-xl">Collections</a>
+      <a href="posts-drops.html" data-nav="posts"       class="nav-link block px-2 py-1.5 rounded-xl">Posts &amp; Drops</a>
+      <a href="ai_tools.html"    data-nav="ai_tools"    class="nav-link block px-2 py-1.5 rounded-xl">AI Tools</a>
+      <a href="settings.html"    data-nav="settings"    class="nav-link block px-2 py-1.5 rounded-xl">Settings</a>
+      <div class="border-t border-white/10 mt-1 pt-1.5">
+        <button
+          class="w-full text-left px-2 py-1.5 rounded-xl bg-white/5 text-white/50 hover:bg-red-500/15 hover:text-red-300 text-[9px] transition">
+          Logout
+        </button>
+      </div>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <main class="flex-1 px-4 md:px-6 pt-4 pb-6 space-y-4">
+      <!-- Header -->
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <div class="min-w-0">
+          <h1 class="text-xl sm:text-2xl font-semibold text-white truncate">New Collection</h1>
+          <p class="mt-1 text-xs sm:text-sm text-white/55">
+            Curate a series, define its identity, connect artworks, and stage it for drops.
           </p>
         </div>
+        <a href="collections.html"
+           class="shrink-0 px-3.5 py-2 rounded-2xl text-[10px] sm:text-xs bg-white/5 text-white/70 border border-white/15 hover:bg-white/10">
+          ← Back to Collections
+        </a>
+      </div>
 
-        <!-- Tags & Mood -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <!-- Form -->
+      <section class="grid grid-cols-1 lg:grid-cols-[2fr,1.1fr] gap-4 text-[11px]">
+        <!-- Left: details -->
+        <div class="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-3">
           <div>
-            <label class="block text-[10px] text-white/45 mb-1">Keywords / Motifs</label>
+            <label class="block text-[10px] text-white/50 mb-1.5">Collection Name</label>
             <input
               type="text"
-              placeholder="glyphs, neon, portals, transmission, spectral cities"
-              class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
-                     focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
-            />
+              class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-[11px] text-white placeholder:text-white/25 focus:outline-none focus:border-[#9B5FFF]"
+              placeholder="Symbols in Motion" />
           </div>
+
           <div>
-            <label class="block text-[10px] text-white/45 mb-1">Tone / Mood</label>
-            <input
-              type="text"
-              placeholder="surreal, electric, archival, lucid, ceremonial"
-              class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
-                     focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
-            />
+            <label class="block text-[10px] text-white/50 mb-1.5">Slug / URL</label>
+            <div class="flex gap-2">
+              <span class="px-2 py-2 rounded-xl bg-black/40 border border-white/10 text-[9px] text-white/40">
+                /collections/
+              </span>
+              <input
+                type="text"
+                class="flex-1 px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-[11px] text-white placeholder:text-white/25 focus:outline-none focus:border-[#9B5FFF]"
+                placeholder="symbols-in-motion" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[10px] text-white/50 mb-1.5">Short Description</label>
+            <textarea
+              rows="3"
+              class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-[11px] text-white placeholder:text-white/25 focus:outline-none focus:border-[#9B5FFF]"
+              placeholder="One or two lines that define the spirit of this series."></textarea>
+          </div>
+
+          <div>
+            <label class="block text-[10px] text-white/50 mb-1.5">Long Description / Lore</label>
+            <textarea
+              rows="5"
+              class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-[11px] text-white placeholder:text-white/25 focus:outline-none focus:border-[#9B5FFF]"
+              placeholder="Storyworld, symbolism, context, and any collector notes."></textarea>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] text-white/50 mb-1.5">Visibility</label>
+              <select
+                class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-[11px] text-white/80 focus:outline-none focus:border-[#9B5FFF]">
+                <option class="bg-[#05060A]">Draft</option>
+                <option class="bg-[#05060A]">Live</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] text-white/50 mb-1.5">Feature Priority</label>
+              <select
+                class="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/15 text-[11px] text-white/80 focus:outline-none focus:border-[#9B5FFF]">
+                <option class="bg-[#05060A]">Normal</option>
+                <option class="bg-[#05060A]">Hero</option>
+                <option class="bg-[#05060A]">Hidden</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <!-- Routing & Visibility -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <div>
-            <label class="block text-[10px] text-white/45 mb-1">Initial Status</label>
-            <select
-              class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
-                     focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
-            >
-              <option selected>Draft (not public)</option>
-              <option>Live on dreamagent.art</option>
-            </select>
+        <!-- Right: art linking + AI -->
+        <div class="space-y-3">
+          <div class="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-[11px] text-white/80">Attach Artworks</div>
+                <div class="text-[9px] text-white/40">
+                  Select artworks to include; you can update anytime.
+                </div>
+              </div>
+            </div>
+            <div class="space-y-1.5 text-[9px] text-white/65">
+              <label class="flex items-center gap-2">
+                <input type="checkbox" class="w-3 h-3 bg-black/60 border-white/40 rounded" />
+                Temple of Openings
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" class="w-3 h-3 bg-black/60 border-white/40 rounded" />
+                Signals &amp; Ascensions #07
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" class="w-3 h-3 bg-black/60 border-white/40 rounded" />
+                Industrial Scriptures
+              </label>
+            </div>
           </div>
-          <div>
-            <label class="block text-[10px] text-white/45 mb-1">Feature Priority</label>
-            <select
-              class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
-                     focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
-            >
-              <option selected>Normal</option>
-              <option>High — eligible for homepage hero</option>
-              <option>Low — archive / deep cut</option>
-            </select>
+
+          <div class="rounded-2xl bg-white/5 border border-white/10 p-4 space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <div>
+                <div class="text-[11px] text-white/80">AI Curation</div>
+                <div class="text-[9px] text-white/40">
+                  Let Dream OS suggest artworks and tags for this collection.
+                </div>
+              </div>
+              <div class="h-2.5 w-2.5 rounded-full bg-[#00FFD1]"></div>
+            </div>
+            <label class="flex items-center gap-2 text-[9px] text-white/70">
+              <input type="checkbox" class="w-3 h-3 rounded bg-black/60 border-white/40" checked />
+              Auto-suggest matching artworks
+            </label>
+            <label class="flex items-center gap-2 text-[9px] text-white/70">
+              <input type="checkbox" class="w-3 h-3 rounded bg-black/60 border-white/40" />
+              Generate tagline &amp; meta description
+            </label>
           </div>
-          <div>
-            <label class="block text-[10px] text-white/45 mb-1">Display Order Hint</label>
-            <input
-              type="number"
-              class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
-                     focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
-              placeholder="Optional index"
-              min="0"
-            />
+
+          <div class="rounded-2xl bg-white/5 border border-white/10 p-4 flex flex-col gap-2">
+            <div class="text-[10px] text-white/55">
+              Saving will create this collection as
+              <span class="text-[#F5C36A]">Draft by default</span>.
+              You can feature and schedule drops from the Collections view.
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button
+                class="px-3 py-1.5 rounded-2xl bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1] text-black text-[10px] font-semibold">
+                Save Collection
+              </button>
+              <button
+                class="px-3 py-1.5 rounded-2xl bg-white/5 border border-white/10 text-white/75 text-[10px]">
+                Save &amp; Run AI Curation
+              </button>
+              <button
+                class="px-3 py-1.5 rounded-2xl bg-transparent text-white/40 text-[10px]">
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </section>
+    </main>
+  </div>
 
-      <!-- RIGHT: Visuals, relationships, AI, commit -->
-      <aside class="space-y-4 text-[11px]">
-        <!-- Visual Identity -->
-        <section class="rounded-2xl bg-white/5 border border-white/10 px-4 py-4 space-y-3">
-          <div class="flex items-center justify-between">
-            <h2 class="text-[12px] text-white/85">Visual Identity</h2>
-            <span class="px-2 py-0.5 rounded-full bg-white/5 text-[9px] text-white/40">
-              Cover &amp; Hero
-            </span>
-          </div>
+  <script>
+    const navOverlay = document.getElementById('nav-overlay');
+    const navPanel = document.getElementById('nav-panel');
 
-          <!-- Cover image -->
-          <div>
-            <label class="block text-[10px] text-white/45 mb-1">Cover Image</label>
-            <div
-              class="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-white/20
-                     bg-black/30 px-3 py-4 hover:border-[#00FFD1]/50 hover:bg-black/40 cursor-pointer transition"
-            >
-              <div class="w-7 h-7 rounded-full bg-gradient-to-br from-[#9B5FFF] to-[#00FFD1] opacity-80"></div>
-              <div class="text-[9px] text-white/65">
-                Drop image or <span class="text-[#00FFD1]">browse</span>
-              </div>
-              <div class="text-[8px] text-white/30">
-                Ideal: 1600×900, JPG/PNG, up to 5MB
-              </div>
-              <input type="file" class="hidden" />
-            </div>
-          </div>
+    function openNavMenu() {
+      navOverlay.classList.remove('pointer-events-none');
+      navOverlay.style.opacity = '1';
+      navPanel.classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
+      navPanel.classList.add('pointer-events-auto', 'opacity-100', 'scale-100');
+    }
+    function closeNavMenu() {
+      navOverlay.style.opacity = '0';
+      navOverlay.classList.add('pointer-events-none');
+      navPanel.classList.add('pointer-events-none', 'opacity-0', 'scale-95');
+      navPanel.classList.remove('pointer-events-auto', 'opacity-100', 'scale-100');
+    }
+    function toggleNavMenu() {
+      const isOpen = navPanel.classList.contains('pointer-events-auto');
+      isOpen ? closeNavMenu() : openNavMenu();
+    }
 
-          <!-- Accent color (visual only) -->
-          <div>
-            <label class="block text-[10px] text-white/45 mb-1">Accent Color (optional)</label>
-            <div class="flex items-center gap-2">
-              <input
-                type="color"
-                value="#00FFD1"
-                class="w-8 h-8 rounded-md border border-white/20 bg-transparent p-0"
-              />
-              <input
-                type="text"
-                value="#00FFD1"
-                class="flex-1 bg-black/40 border border-white/15 rounded-lg px-2 py-1.5 text-[9px] text-white/80
-                       focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
-              />
-            </div>
-            <p class="text-[8px] text-white/30 mt-1">
-              Used as a hint for UI and marketing surfaces (non-blocking).
-            </p>
-          </div>
-        </section>
+    (function setActiveNav() {
+      const current = document.body.dataset.section;
+      document.querySelectorAll('.nav-link').forEach(link => {
+        const key = link.dataset.nav;
+        if (key === current) {
+          link.classList.add('bg-[#9B5FFF]/20', 'text-[#9B5FFF]');
+        } else {
+          link.classList.add('text-white/65', 'hover:bg-white/5', 'hover:text-white');
+        }
+      });
+    })();
 
-        <!-- Relationships -->
-        <section class="rounded-2xl bg-white/5 border border-white/10 px-4 py-4 space-y-3">
-          <div class="flex items-center justify-between">
-            <h2 class="text-[12px] text-white/85">Artworks &amp; Links</h2>
-            <span class="px-2 py-0.5 rounded-full bg-white/5 text-[9px] text-white/40">
-              Relations
-            </span>
-          </div>
-          <p class="text-[9px] text-white/40">
-            You can attach artworks now or later from the Artworks dashboard.
-          </p>
-
-          <!-- Quick attach (static prototype) -->
-          <div class="space-y-2">
-            <label class="block text-[10px] text-white/45 mb-1">Attach Existing Artworks</label>
-            <input
-              type="text"
-              placeholder="Search artworks by title or slug..."
-              class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
-                     focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
-            />
-            <div class="text-[8px] text-white/30">
-              (Prototype) In app: autocomplete &amp; multi-select, then show chosen chips.
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-[10px] text-white/45 mb-1">External / Marketplace URL (optional)</label>
-            <input
-              type="text"
-              placeholder="Collection URL on XRP Café, OpenSea, etc."
-              class="w-full bg-black/40 border border-white/15 rounded-lg px-3 py-2 text-[10px] text-white/80
-                     focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
-            />
-          </div>
-        </section>
-
-        <!-- AI Assistance -->
-        <section class="rounded-2xl bg-white/5 border border-white/10 px-4 py-4 space-y-3">
-          <div class="flex items-center justify-between">
-            <h2 class="text-[12px] text-white/85">AI Assistance</h2>
-            <span class="px-2 py-0.5 rounded-full bg-white/5 text-[9px] text-white/40">
-              Neural Core
-            </span>
-          </div>
-          <p class="text-[9px] text-white/40">
-            Use AI to make this collection coherent across copy, tags, and pricing hints.
-          </p>
-
-          <label class="flex items-start gap-2 text-[9px] text-white/75">
-            <input type="checkbox" class="mt-0.5 w-3 h-3 border-white/30 bg-black/60" checked />
-            <span>Generate a short tagline + SEO snippet from the curatorial statement.</span>
-          </label>
-
-          <label class="flex items-start gap-2 text-[9px] text-white/75">
-            <input type="checkbox" class="mt-0.5 w-3 h-3 border-white/30 bg-black/60" />
-            <span>Normalize artwork tags for this collection for better discovery.</span>
-          </label>
-
-          <label class="flex items-start gap-2 text-[9px] text-white/75">
-            <input type="checkbox" class="mt-0.5 w-3 h-3 border-white/30 bg-black/60" />
-            <span>Suggest floor + premium pricing ranges for linked artworks.</span>
-          </label>
-
-          <label class="flex items-start gap-2 text-[9px] text-white/60">
-            <input type="checkbox" class="mt-0.5 w-3 h-3 border-white/30 bg-black/60" />
-            <span>Create a draft feature post in Posts &amp; Drops when this goes live.</span>
-          </label>
-        </section>
-
-        <!-- Commit -->
-        <section class="rounded-2xl bg-white/5 border border-white/10 px-4 py-4 space-y-2">
-          <div class="flex items-center justify-between">
-            <h2 class="text-[12px] text-white/85">Commit</h2>
-            <span class="text-[9px] text-white/35">Safe to adjust later.</span>
-          </div>
-          <button
-            class="w-full px-3 py-2 rounded-xl text-[10px] bg-white/5 text-white/80 border border-white/15
-                   hover:bg-white/10"
-            type="button"
-          >
-            Save as Draft
-          </button>
-          <button
-            class="w-full px-3 py-2 rounded-xl text-[10px] bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1]
-                   text-black font-semibold shadow-lg shadow-black/40 hover:opacity-95"
-            type="button"
-          >
-            Create &amp; Set Live
-          </button>
-          <label class="mt-1 flex items-start gap-2 text-[8px] text-white/55">
-            <input type="checkbox" class="mt-0.5 w-3 h-3 border-white/30 bg-black/60" />
-            <span>Mark as featured collection (eligible for homepage hero + AI promotion).</span>
-          </label>
-        </section>
-      </aside>
-    </div>
-  </main>
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeNavMenu();
+    });
+  </script>
 </body>
 </html>

@@ -6,194 +6,351 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen bg-[#05060A] text-white flex flex-col" data-section="collections">
-  <!-- Top Bar (identical to dashboard, just label text) -->
-  <header class="w-full flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/10 bg-white/5 backdrop-blur-xl sticky top-0 z-40">
-    <div class="flex items-center gap-2">
+<body class="min-h-screen bg-[#05060A] text-white flex" data-section="collections">
+  <!-- DESKTOP SIDEBAR (md+) -->
+  <aside class="hidden md:flex w-60 bg-white/5 border-r border-white/10 backdrop-blur-xl flex-col">
+    <div class="px-5 py-4 flex items-center gap-2 border-b border-white/10">
       <div class="h-7 w-7 rounded-full bg-gradient-to-br from-[#9B5FFF] to-[#00FFD1]"></div>
       <div>
-        <div class="text-[10px] md:text-xs uppercase text-white/40 tracking-[0.18em]">Dream OS</div>
-        <div class="text-[8px] md:text-[9px] text-white/45">Command Console</div>
+        <div class="text-xs uppercase text-white/40 tracking-[0.18em]">Dream OS</div>
+        <div class="text-[9px] text-white/45">Command Console</div>
       </div>
     </div>
-    <div class="flex items-center gap-3">
-      <span class="hidden sm:inline-block text-[9px] md:text-[10px] text-white/40 uppercase tracking-[0.14em]">
-        Collections
-      </span>
-      <button
-        class="h-8 w-8 flex items-center justify-center rounded-full border border-white/20 bg-black/40 hover:bg-black/70 hover:border-[#9B5FFF] transition"
-        aria-label="Open menu"
-        onclick="toggleNavMenu()"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-          <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
-      </button>
-    </div>
-  </header>
 
-  <!-- Nav Overlay & Panel (same HTML, same classes) -->
-  <div
-    id="nav-overlay"
-    class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-200 z-30"
-    onclick="closeNavMenu()"
-  ></div>
+    <nav class="flex-1 px-3 py-3 text-xs space-y-1">
+      <a href="dashboard.html"   data-nav="artworks"    class="nav-link block px-3 py-2 rounded-xl">Artworks</a>
+      <a href="collections.html" data-nav="collections" class="nav-link block px-3 py-2 rounded-xl">Collections</a>
+      <a href="posts-drops.html" data-nav="posts"       class="nav-link block px-3 py-2 rounded-xl">Posts &amp; Drops</a>
+      <a href="ai_tools.html"    data-nav="ai_tools"    class="nav-link block px-3 py-2 rounded-xl">AI Tools</a>
+      <a href="settings.html"    data-nav="settings"    class="nav-link block px-3 py-2 rounded-xl">Settings</a>
+    </nav>
 
-  <nav
-    id="nav-panel"
-    class="fixed top-3 right-3 mt-9 w-44 md:w-52 rounded-2xl bg-[#05060A]/98 border border-white/15 shadow-2xl px-3 py-2 space-y-1 text-[10px] md:text-[11px] opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50"
-  >
-    <div class="px-1 py-1 text-[8px] uppercase tracking-[0.16em] text-white/35">
-      Navigation
-    </div>
-    <a href="dashboard.html" data-nav="artworks" class="nav-link block px-2 py-1.5 rounded-xl">
-      Artworks
-    </a>
-    <a href="collections.html" data-nav="collections" class="nav-link block px-2 py-1.5 rounded-xl">
-      Collections
-    </a>
-    <a href="posts-drops.html" data-nav="posts" class="nav-link block px-2 py-1.5 rounded-xl">
-      Posts &amp; Drops
-    </a>
-    <a href="ai_tools.html" data-nav="ai_tools" class="nav-link block px-2 py-1.5 rounded-xl">
-      AI Tools
-    </a>
-    <a href="settings.html" data-nav="settings" class="nav-link block px-2 py-1.5 rounded-xl">
-      Settings
-    </a>
-    <div class="border-t border-white/10 mt-1 pt-1.5">
-      <button
-        class="w-full text-left px-2 py-1.5 rounded-xl bg-white/5 text-white/50 hover:bg-red-500/15 hover:text-red-300 text-[9px] transition"
-      >
-        Logout
-      </button>
-    </div>
-  </nav>
+    <button
+      class="m-3 mb-4 px-3 py-2 text-[10px] rounded-xl bg-white/5 text-white/50 hover:bg-red-500/10 hover:text-red-300 transition">
+      Logout
+    </button>
+  </aside>
 
-  <!-- Main -->
-  <main class="flex-1 px-4 md:px-6 pt-4 pb-6">
-    <!-- Header -->
-    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 mb-4">
-      <div>
-        <h1 class="text-base sm:text-lg font-semibold text-white">Collections</h1>
-        <p class="text-[10px] sm:text-[12px] text-white/45">
-          Group, stage, and feature series across the Dream Agent universe.
-        </p>
+  <!-- MAIN COLUMN -->
+  <div class="flex-1 flex flex-col">
+    <!-- MOBILE TOP BAR -->
+    <header
+      class="md:hidden w-full flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5 backdrop-blur-xl sticky top-0 z-40">
+      <div class="flex items-center gap-2">
+        <div class="h-7 w-7 rounded-full bg-gradient-to-br from-[#9B5FFF] to-[#00FFD1]"></div>
+        <div>
+          <div class="text-[10px] uppercase text-white/40 tracking-[0.18em]">Dream OS</div>
+          <div class="text-[8px] text-white/45">Command Console</div>
+        </div>
       </div>
-      <button
-        class="self-start sm:self-auto px-3 py-1.5 rounded-xl text-[10px] sm:text-[12px] bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1] text-black font-semibold shadow-lg shadow-black/40"
-      >
-        + New Collection
-      </button>
-    </div>
+      <div class="flex items-center gap-2">
+        <span class="hidden xs:inline text-[8px] text-white/45 uppercase tracking-[0.14em]">
+          Collections
+        </span>
+        <button
+          class="h-8 w-8 flex items-center justify-center rounded-full border border-white/20 bg-black/40 hover:bg-black/70 hover:border-[#9B5FFF] transition"
+          aria-label="Open menu"
+          onclick="toggleNavMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.6">
+            <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
 
-    <!-- MOBILE: Cards -->
-    <section class="space-y-3 md:hidden">
-      <!-- Symbols in Motion -->
-      <div class="rounded-2xl border border-white/10 bg-white/5 p-3 flex flex-col gap-2">
-        <div class="flex justify-between items-start gap-3">
-          <div>
-            <div class="text-xs font-semibold">Symbols in Motion</div>
-            <div class="text-[8px] text-white/40 truncate">/collections/symbols-in-motion</div>
+    <!-- MOBILE NAV OVERLAY & PANEL -->
+    <div id="nav-overlay"
+         class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-200 z-30 md:hidden"
+         onclick="closeNavMenu()"></div>
+
+    <nav id="nav-panel"
+         class="fixed top-3 right-3 mt-9 w-44 rounded-2xl bg-[#05060A]/98 border border-white/15 shadow-2xl px-3 py-2
+                space-y-1 text-[10px] opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50 md:hidden">
+      <div class="px-1 py-1 text-[8px] uppercase tracking-[0.16em] text-white/35">Navigation</div>
+      <a href="dashboard.html"   data-nav="artworks"    class="nav-link block px-2 py-1.5 rounded-xl">Artworks</a>
+      <a href="collections.html" data-nav="collections" class="nav-link block px-2 py-1.5 rounded-xl">Collections</a>
+      <a href="posts-drops.html" data-nav="posts"       class="nav-link block px-2 py-1.5 rounded-xl">Posts &amp; Drops</a>
+      <a href="ai_tools.html"    data-nav="ai_tools"    class="nav-link block px-2 py-1.5 rounded-xl">AI Tools</a>
+      <a href="settings.html"    data-nav="settings"    class="nav-link block px-2 py-1.5 rounded-xl">Settings</a>
+      <div class="border-t border-white/10 mt-1 pt-1.5">
+        <button
+          class="w-full text-left px-2 py-1.5 rounded-xl bg-white/5 text-white/50 hover:bg-red-500/15 hover:text-red-300 text-[9px] transition">
+          Logout
+        </button>
+      </div>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <main class="flex-1 px-4 md:px-6 pt-4 pb-6 space-y-4">
+      <!-- Header: title + New Collection inline -->
+      <div class="flex items-center justify-between flex-wrap gap-3 mb-2">
+        <div class="min-w-0">
+          <h1 class="text-xl sm:text-2xl font-semibold text-white truncate">Collections</h1>
+          <p class="mt-1 text-xs sm:text-sm text-white/55">
+            Group, stage, and feature series across the Dream Agent universe.
+          </p>
+        </div>
+        <a href="new_collection.html"
+           class="shrink-0 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl text-xs sm:text-sm bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1]
+                  text-black font-semibold shadow-lg shadow-black/40 hover:brightness-110 transition">
+          + New Collection
+        </a>
+      </div>
+
+      <!-- MOBILE: CARD VIEW -->
+      <section class="space-y-3 md:hidden text-[10px]">
+        <!-- Symbols in Motion -->
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-3.5 flex flex-col gap-2.5">
+          <div class="flex justify-between items-start gap-3">
+            <div>
+              <div class="text-sm font-semibold">Symbols in Motion</div>
+              <div class="text-[9px] text-white/40 truncate">/collections/symbols-in-motion</div>
+            </div>
+            <button
+              class="px-2.5 py-1 rounded-xl bg-white/5 border border-white/15 text-[9px] text-white/75">
+              Manage
+            </button>
           </div>
-          <button
-            class="px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[8px] text-white/75"
-            onclick="openMobileCollectionActions('symbols')"
-          >
-            Manage
-          </button>
-        </div>
-        <div class="flex flex-wrap items-center gap-2 text-[8px] text-white/55">
-          <span>18 artworks</span>
-          <span class="inline-flex px-2 py-0.5 rounded-full bg-[#00FFD1]/15 text-[#00FFD1]">Live</span>
-          <span class="inline-flex px-2 py-0.5 rounded-full bg-[#9B5FFF]/20 text-[#9B5FFF]">Featured</span>
-        </div>
-        <div class="text-[8px] text-white/40">Last updated: 2025-10-02 • Curated</div>
-      </div>
-
-      <!-- Signals & Ascensions -->
-      <div class="rounded-2xl border border-white/10 bg-white/5 p-3 flex flex-col gap-2">
-        <div class="flex justify-between items-start gap-3">
-          <div>
-            <div class="text-xs font-semibold">Signals &amp; Ascensions</div>
-            <div class="text-[8px] text-white/40 truncate">/collections/signals-ascensions</div>
+          <div class="flex flex-wrap items-center gap-2 text-[9px] text-white/65">
+            <span>18 artworks</span>
+            <span class="inline-flex px-2 py-0.5 rounded-full bg-[#00FFD1]/15 text-[#00FFD1] text-[8px]">Live</span>
+            <span class="inline-flex px-2 py-0.5 rounded-full bg-[#9B5FFF]/20 text-[#9B5FFF] text-[8px]">Featured</span>
           </div>
-          <button
-            class="px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[8px] text-white/75"
-            onclick="openMobileCollectionActions('signals')"
-          >
-            Manage
-          </button>
-        </div>
-        <div class="flex flex-wrap items-center gap-2 text-[8px] text-white/55">
-          <span>9 artworks</span>
-          <span class="inline-flex px-2 py-0.5 rounded-full bg-white/5 text-white/60">Draft</span>
-          <span class="text-white/35">Not featured</span>
-        </div>
-        <div class="text-[8px] text-white/40">Last updated: 2025-09-21 • Updated</div>
-      </div>
-
-      <!-- Industrial Scriptures -->
-      <div class="rounded-2xl border border-white/10 bg-white/5 p-3 flex flex-col gap-2">
-        <div class="flex justify-between items-start gap-3">
-          <div>
-            <div class="text-xs font-semibold">Industrial Scriptures</div>
-            <div class="text-[8px] text-white/40 truncate">/collections/industrial-scriptures</div>
+          <div class="text-[8px] text-white/45">
+            Last updated: 2025-10-02 • Curated
           </div>
-          <button
-            class="px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[8px] text-white/75"
-            onclick="openMobileCollectionActions('industrial')"
-          >
-            Manage
-          </button>
         </div>
-        <div class="flex flex-wrap items-center gap-2 text-[8px] text-white/55">
-          <span>6 artworks</span>
-          <span class="inline-flex px-2 py-0.5 rounded-full bg-[#00FFD1]/15 text-[#00FFD1]">Live</span>
-          <span class="text-white/35">Not featured</span>
+
+        <!-- Signals & Ascensions -->
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-3.5 flex flex-col gap-2.5">
+          <div class="flex justify-between items-start gap-3">
+            <div>
+              <div class="text-sm font-semibold">Signals &amp; Ascensions</div>
+              <div class="text-[9px] text-white/40 truncate">/collections/signals-ascensions</div>
+            </div>
+            <button
+              class="px-2.5 py-1 rounded-xl bg-white/5 border border-white/15 text-[9px] text-white/75">
+              Manage
+            </button>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 text-[9px] text-white/65">
+            <span>9 artworks</span>
+            <span class="inline-flex px-2 py-0.5 rounded-full bg-white/5 text-white/60 text-[8px]">Draft</span>
+            <span class="text-white/40">Not featured</span>
+          </div>
+          <div class="text-[8px] text-white/45">
+            Last updated: 2025-09-21 • Updated
+          </div>
         </div>
-        <div class="text-[8px] text-white/40">Last updated: 2025-08-03 • Synced</div>
-      </div>
-    </section>
 
-    <!-- TABLE: md+ -->
-    <section class="hidden md:block">
-      <!-- (Table markup from your original, unchanged, with Actions dropdowns) -->
-      <!-- ... -->
-    </section>
-  </main>
+        <!-- Industrial Scriptures -->
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-3.5 flex flex-col gap-2.5">
+          <div class="flex justify-between items-start gap-3">
+            <div>
+              <div class="text-sm font-semibold">Industrial Scriptures</div>
+              <div class="text-[9px] text-white/40 truncate">/collections/industrial-scriptures</div>
+            </div>
+            <button
+              class="px-2.5 py-1 rounded-xl bg-white/5 border border-white/15 text-[9px] text-white/75">
+              Manage
+            </button>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 text-[9px] text-white/65">
+            <span>6 artworks</span>
+            <span class="inline-flex px-2 py-0.5 rounded-full bg-[#00FFD1]/15 text-[#00FFD1] text-[8px]">Live</span>
+            <span class="text-white/40">Not featured</span>
+          </div>
+          <div class="text-[8px] text-white/45">
+            Last updated: 2025-08-03 • Synced
+          </div>
+        </div>
+      </section>
 
-  <!-- Mobile Manage Actions Backdrop -->
-  <div
-    id="mobile-col-backdrop"
-    class="fixed inset-0 bg-black/60 opacity-0 pointer-events-none transition-opacity duration-200 md:hidden z-40"
-    onclick="closeMobileCollectionActions()"
-  ></div>
+      <!-- DESKTOP: TABLE VIEW -->
+      <section class="hidden md:block">
+        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden text-[11px]">
+          <!-- Header -->
+          <div class="px-3 py-2 border-b border-white/10 flex items-center justify-between text-white/45">
+            <div class="flex items-center flex-1">
+              <div class="w-40">Name</div>
+              <div class="w-40">Slug</div>
+              <div class="w-20">Artworks</div>
+              <div class="w-24">Status</div>
+              <div class="w-24">Featured</div>
+              <div class="w-40">Last Updated</div>
+            </div>
+            <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+              <div class="w-8 text-center">AI</div>
+              <div class="w-24 text-right">Actions</div>
+            </div>
+          </div>
 
-  <!-- Mobile Manage Actions Sheet -->
-  <div
-    id="mobile-col-sheet"
-    class="fixed inset-x-0 bottom-0 translate-y-full bg-[#05060A] border-t border-white/15 rounded-t-2xl p-3 space-y-2 shadow-2xl z-50 transition-transform duration-200 md:hidden"
-  >
-    <div class="flex items-center justify-between mb-1">
-      <div>
-        <div class="text-[9px] uppercase tracking-[0.16em] text-white/40">Manage Collection</div>
-        <div id="mobile-col-title" class="text-xs font-semibold text-white/90"></div>
-      </div>
-      <button onclick="closeMobileCollectionActions()" class="text-white/50 hover:text-white text-sm">✕</button>
-    </div>
-    <div id="mobile-col-actions" class="flex flex-col gap-1.5 text-[10px]"></div>
+          <!-- Row 1 -->
+          <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between hover:bg-white/[0.03]">
+            <div class="flex items-center flex-1">
+              <div class="w-40 truncate text-white/90">Symbols in Motion</div>
+              <div class="w-40 text-white/40 truncate">/collections/symbols-in-motion</div>
+              <div class="w-20 text-white/80">18</div>
+              <div class="w-24">
+                <span class="inline-flex px-2 py-0.5 rounded-full text-[9px] bg-[#00FFD1]/15 text-[#00FFD1]">
+                  Live
+                </span>
+              </div>
+              <div class="w-24">
+                <span class="inline-flex px-2 py-0.5 rounded-full text-[9px] bg-[#9B5FFF]/20 text-[#9B5FFF]">
+                  Featured
+                </span>
+              </div>
+              <div class="w-40 text-white/45">
+                2025-10-02 • Curated
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+              <div class="w-8 flex justify-center">
+                <svg class="w-4 h-4 text-[#00FFD1]" viewBox="0 0 24 24" fill="currentColor">
+                  <title>Analyzed — Ready</title>
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+              </div>
+              <div class="relative inline-block text-left w-24 text-right">
+                <button
+                  onclick="toggleRowMenu(event, 'col-menu-1')"
+                  class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/75 hover:bg-white/10">
+                  Actions <span class="text-[8px]">▼</span>
+                </button>
+                <div
+                  id="col-menu-1"
+                  class="hidden absolute right-0 mt-1 w-44 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20">
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/90 hover:bg-white/5">
+                    View Collection
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                    Edit Details
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/35 cursor-not-allowed" disabled>
+                    Set as Featured (Already)
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-red-300/90 hover:bg-red-500/10">
+                    Archive Collection
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between hover:bg-white/[0.03]">
+            <div class="flex items-center flex-1">
+              <div class="w-40 truncate text-white/90">Signals &amp; Ascensions</div>
+              <div class="w-40 text-white/40 truncate">/collections/signals-ascensions</div>
+              <div class="w-20 text-white/80">9</div>
+              <div class="w-24">
+                <span class="inline-flex px-2 py-0.5 rounded-full text-[9px] bg-white/5 text-white/55">
+                  Draft
+                </span>
+              </div>
+              <div class="w-24 text-white/35">
+                Not featured
+              </div>
+              <div class="w-40 text-white/45">
+                2025-09-21 • Updated
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+              <div class="w-8 flex justify-center">
+                <svg class="w-4 h-4 text-white/35" viewBox="0 0 24 24" fill="currentColor">
+                  <title>Not analyzed</title>
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+              </div>
+              <div class="relative inline-block text-left w-24 text-right">
+                <button
+                  onclick="toggleRowMenu(event, 'col-menu-2')"
+                  class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/75 hover:bg-white/10">
+                  Actions <span class="text-[8px]">▼</span>
+                </button>
+                <div
+                  id="col-menu-2"
+                  class="hidden absolute right-0 mt-1 w-44 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20">
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/90 hover:bg-white/5">
+                    View Collection
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                    Edit Details
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
+                    Set as Featured
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/35 cursor-not-allowed" disabled>
+                    Archive (No artworks)
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between hover:bg-white/[0.03]">
+            <div class="flex items-center flex-1">
+              <div class="w-40 truncate text-white/90">Industrial Scriptures</div>
+              <div class="w-40 text-white/40 truncate">/collections/industrial-scriptures</div>
+              <div class="w-20 text-white/80">6</div>
+              <div class="w-24">
+                <span class="inline-flex px-2 py-0.5 rounded-full text-[9px] bg-[#00FFD1]/15 text-[#00FFD1]">
+                  Live
+                </span>
+              </div>
+              <div class="w-24 text-white/35">
+                Not featured
+              </div>
+              <div class="w-40 text-white/45">
+                2025-08-03 • Synced
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+              <div class="w-8 flex justify-center">
+                <svg class="w-4 h-4 text-[#00FFD1]" viewBox="0 0 24 24" fill="currentColor">
+                  <title>Analyzed — Ready</title>
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+              </div>
+              <div class="relative inline-block text-left w-24 text-right">
+                <button
+                  onclick="toggleRowMenu(event, 'col-menu-3')"
+                  class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/75 hover:bg-white/10">
+                  Actions <span class="text-[8px]">▼</span>
+                </button>
+                <div
+                  id="col-menu-3"
+                  class="hidden absolute right-0 mt-1 w-44 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20">
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/90 hover:bg-white/5">
+                    View Collection
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                    Edit Details
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
+                    Set as Featured
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-red-300/90 hover:bg-red-500/10">
+                    Archive Collection
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
   </div>
 
   <script>
-    /* === Shared Nav Logic (same as dashboard) === */
+    // Mobile nav shared
     const navOverlay = document.getElementById('nav-overlay');
     const navPanel = document.getElementById('nav-panel');
 
-    function toggleNavMenu() {
-      const isOpen = navPanel.classList.contains('pointer-events-auto');
-      isOpen ? closeNavMenu() : openNavMenu();
-    }
     function openNavMenu() {
       navOverlay.classList.remove('pointer-events-none');
       navOverlay.style.opacity = '1';
@@ -206,86 +363,44 @@
       navPanel.classList.add('pointer-events-none', 'opacity-0', 'scale-95');
       navPanel.classList.remove('pointer-events-auto', 'opacity-100', 'scale-100');
     }
+    function toggleNavMenu() {
+      const isOpen = navPanel.classList.contains('pointer-events-auto');
+      isOpen ? closeNavMenu() : openNavMenu();
+    }
 
+    // Active nav
     (function setActiveNav() {
       const current = document.body.dataset.section;
       document.querySelectorAll('.nav-link').forEach(link => {
         const key = link.dataset.nav;
+        if (!key) return;
         if (key === current) {
-          link.classList.add('bg-[#9B5FFF]/15', 'text-[#9B5FFF]');
+          link.classList.add('bg-[#9B5FFF]/20', 'text-[#9B5FFF]');
         } else {
-          link.classList.add('text-white/70', 'hover:bg:white/5', 'hover:text-white');
+          link.classList.add('text-white/65', 'hover:bg-white/5', 'hover:text-white');
         }
       });
     })();
 
+    // Desktop row menus
+    function toggleRowMenu(event, id) {
+      event.stopPropagation();
+      const menu = document.getElementById(id);
+      document.querySelectorAll("[id^='col-menu-']").forEach(m => {
+        if (m !== menu) m.classList.add("hidden");
+      });
+      menu.classList.toggle("hidden");
+    }
+    document.addEventListener("click", () => {
+      document.querySelectorAll("[id^='col-menu-']").forEach(m => m.classList.add("hidden"));
+    });
+
+    // ESC closes nav
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeNavMenu();
-        closeMobileCollectionActions();
       }
     });
-
-    /* === Mobile Collections Sheet === */
-    const colBackdrop = document.getElementById('mobile-col-backdrop');
-    const colSheet = document.getElementById('mobile-col-sheet');
-    const colTitle = document.getElementById('mobile-col-title');
-    const colActions = document.getElementById('mobile-col-actions');
-
-    function openMobileCollectionActions(key) {
-      closeNavMenu();
-      let config = { title: '', actions: [] };
-
-      if (key === 'symbols') {
-        config.title = 'Symbols in Motion';
-        config.actions = [
-          { label: 'View Collection', disabled: false },
-          { label: 'Edit Details', disabled: false },
-          { label: 'Set as Featured (Already)', disabled: true },
-          { label: 'Archive Collection', disabled: false }
-        ];
-      } else if (key === 'signals') {
-        config.title = 'Signals & Ascensions';
-        config.actions = [
-          { label: 'View Collection', disabled: false },
-          { label: 'Edit Details', disabled: false },
-          { label: 'Set as Featured', disabled: false },
-          { label: 'Archive (No artworks)', disabled: true }
-        ];
-      } else if (key === 'industrial') {
-        config.title = 'Industrial Scriptures';
-        config.actions = [
-          { label: 'View Collection', disabled: false },
-          { label: 'Edit Details', disabled: false },
-          { label: 'Set as Featured', disabled: false },
-          { label: 'Archive Collection', disabled: false }
-        ];
-      }
-
-      colTitle.textContent = config.title;
-      colActions.innerHTML = '';
-      config.actions.forEach(action => {
-        const btn = document.createElement('button');
-        btn.className =
-          'w-full text-left px-3 py-1.5 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/10 ' +
-          (action.disabled ? 'text-white/30 cursor-not-allowed' : 'text-white/85');
-        btn.textContent = action.label;
-        if (!action.disabled) {
-          btn.onclick = () => closeMobileCollectionActions();
-        }
-        colActions.appendChild(btn);
-      });
-
-      colBackdrop.classList.remove('pointer-events-none');
-      colBackdrop.style.opacity = '1';
-      colSheet.style.transform = 'translateY(0%)';
-    }
-
-    function closeMobileCollectionActions() {
-      colBackdrop.style.opacity = '0';
-      colBackdrop.classList.add('pointer-events-none');
-      colSheet.style.transform = 'translateY(100%)';
-    }
   </script>
 </body>
 </html>
