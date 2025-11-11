@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen bg-[#05060A] text-white flex">
-  <!-- Sidebar -->
-  <aside class="w-60 bg-white/5 border-r border-white/10 backdrop-blur-xl flex flex-col">
+<body class="min-h-screen bg-[#05060A] text-white flex" data-section="ai_tools">
+  <!-- DESKTOP SIDEBAR (md+) -->
+  <aside class="hidden md:flex w-60 bg-white/5 border-r border-white/10 backdrop-blur-xl flex-col">
     <div class="px-5 py-4 flex items-center gap-2 border-b border-white/10">
       <div class="h-7 w-7 rounded-full bg-gradient-to-br from-[#9B5FFF] to-[#00FFD1]"></div>
       <div>
@@ -18,379 +18,488 @@
     </div>
 
     <nav class="flex-1 px-3 py-3 text-xs space-y-1">
-      <a href="dashboard.html" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
-        Artworks
-      </a>
-      <a href="collections.html" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
-        Collections
-      </a>
-      <a href="posts-drops.html" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
-        Posts &amp; Drops
-      </a>
-      <a href="#" class="block px-3 py-2 rounded-xl bg-[#9B5FFF]/20 text-[#9B5FFF]">
-        AI Tools
-      </a>
-      <a href="settings.html" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
-        Settings
-      </a>
+      <a href="dashboard.html"   data-nav="artworks"    class="nav-link block px-3 py-2 rounded-xl">Artworks</a>
+      <a href="collections.html" data-nav="collections" class="nav-link block px-3 py-2 rounded-xl">Collections</a>
+      <a href="posts-drops.html" data-nav="posts"       class="nav-link block px-3 py-2 rounded-xl">Posts &amp; Drops</a>
+      <a href="ai_tools.html"    data-nav="ai_tools"    class="nav-link block px-3 py-2 rounded-xl">AI Tools</a>
+      <a href="settings.html"    data-nav="settings"    class="nav-link block px-3 py-2 rounded-xl">Settings</a>
     </nav>
 
     <button
-      class="m-3 mb-4 px-3 py-2 text-[10px] rounded-xl bg-white/5 text-white/50 hover:bg-red-500/10 hover:text-red-300 transition"
-    >
+      class="m-3 mb-4 px-3 py-2 text-[10px] rounded-xl bg-white/5 text-white/50 hover:bg-red-500/10 hover:text-red-300 transition">
       Logout
     </button>
   </aside>
 
-  <!-- Main -->
-  <main class="flex-1 p-6 space-y-6">
-    <!-- Header -->
-    <div class="flex items-baseline justify-between gap-3">
-      <div>
-        <h1 class="text-lg font-semibold text-white">AI Tools</h1>
-        <p class="text-[12px] text-white/45">
-          Configure the neural layer: analysis, pricing, metadata, and automation across Dream Agent surfaces.
-        </p>
+  <!-- MAIN COLUMN -->
+  <div class="flex-1 flex flex-col">
+    <!-- MOBILE TOP BAR (only <md) -->
+    <header
+      class="md:hidden w-full flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5 backdrop-blur-xl sticky top-0 z-40">
+      <div class="flex items-center gap-2">
+        <div class="h-7 w-7 rounded-full bg-gradient-to-br from-[#9B5FFF] to-[#00FFD1]"></div>
+        <div>
+          <div class="text-[10px] uppercase text-white/40 tracking-[0.18em]">Dream OS</div>
+          <div class="text-[8px] text-white/45">Command Console</div>
+        </div>
       </div>
-      <div class="flex gap-2">
-        <button class="px-3 py-1.5 rounded-xl text-[11px] bg-white/5 text-white/70 border border-white/10 hover:bg-white/10">
-          Run Full System Scan
+      <div class="flex items-center gap-2">
+        <span class="hidden xs:inline text-[8px] text-white/45 uppercase tracking-[0.14em]">
+          AI Tools
+        </span>
+        <button
+          class="h-8 w-8 flex items-center justify-center rounded-full border border-white/20 bg-black/40 hover:bg-black/70 hover:border-[#9B5FFF] transition"
+          aria-label="Open menu"
+          onclick="toggleNavMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.6">
+            <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
         </button>
-        <button class="px-3 py-1.5 rounded-xl text-[11px] bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1] text-black font-semibold shadow-lg shadow-black/40">
-          + New Automation
+      </div>
+    </header>
+
+    <!-- MOBILE NAV OVERLAY & PANEL -->
+    <div id="nav-overlay"
+         class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition-opacity duration-200 z-30 md:hidden"
+         onclick="closeNavMenu()"></div>
+
+    <nav id="nav-panel"
+         class="fixed top-3 right-3 mt-9 w-44 rounded-2xl bg-[#05060A]/98 border border-white/15 shadow-2xl px-3 py-2
+                space-y-1 text-[10px] opacity-0 scale-95 pointer-events-none transition-all duration-200 z-50 md:hidden">
+      <div class="px-1 py-1 text-[8px] uppercase tracking-[0.16em] text-white/35">Navigation</div>
+      <a href="dashboard.html"   data-nav="artworks"    class="nav-link block px-2 py-1.5 rounded-xl">Artworks</a>
+      <a href="collections.html" data-nav="collections" class="nav-link block px-2 py-1.5 rounded-xl">Collections</a>
+      <a href="posts-drops.html" data-nav="posts"       class="nav-link block px-2 py-1.5 rounded-xl">Posts &amp; Drops</a>
+      <a href="ai_tools.html"    data-nav="ai_tools"    class="nav-link block px-2 py-1.5 rounded-xl">AI Tools</a>
+      <a href="settings.html"    data-nav="settings"    class="nav-link block px-2 py-1.5 rounded-xl">Settings</a>
+      <div class="border-t border-white/10 mt-1 pt-1.5">
+        <button
+          class="w-full text-left px-2 py-1.5 rounded-xl bg-white/5 text-white/50 hover:bg-red-500/15 hover:text-red-300 text-[9px] transition">
+          Logout
         </button>
       </div>
-    </div>
+    </nav>
 
-    <!-- Top status strip -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-      <div class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 text-[11px]">
-        <div class="text-white/45 mb-1">Artwork Coverage</div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-xl text-[#00FFD1] font-semibold">82%</span>
-          <span class="text-white/35">have AI pricing &amp; metadata</span>
+    <!-- PAGE CONTENT -->
+    <main class="flex-1 px-4 md:px-6 pt-4 pb-6 space-y-6">
+      <!-- HEADER: Title + New Automation inline, works on mobile + desktop -->
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <div class="min-w-0">
+          <h1 class="text-xl sm:text-2xl font-semibold text-white truncate">
+            AI Tools
+          </h1>
+          <p class="mt-1 text-xs sm:text-sm text-white/55">
+            Configure the neural layer: analysis, pricing, metadata, and automation.
+          </p>
         </div>
-      </div>
-      <div class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 text-[11px]">
-        <div class="text-white/45 mb-1">Automations Active</div>
-        <div class="flex items-baseline gap-2">
-          <span class="text-xl text-[#9B5FFF] font-semibold">5</span>
-          <span class="text-white/35">routines watching your universe</span>
-        </div>
-      </div>
-      <div class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 text-[11px]">
-        <div class="text-white/45 mb-1">Risk &amp; Integrity</div>
-        <div class="flex items-center gap-2">
-          <span class="inline-flex h-2 w-2 rounded-full bg-[#00FFD1]"></span>
-          <span class="text-white/80">All good</span>
-          <span class="text-white/35">no anomalies detected</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- AI Tool Presets Table -->
-    <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
-      <!-- Header -->
-      <div class="px-3 py-2 border-b border-white/10 flex items-center justify-between text-[11px] text-white/45">
-        <!-- Left -->
-        <div class="flex items-center flex-1">
-          <div class="w-40">Tool</div>
-          <div class="w-40">Scope</div>
-          <div class="w-32">Mode</div>
-          <div class="w-40">Last Run</div>
-          <div class="w-40">Output Target</div>
-        </div>
-        <!-- Right -->
-        <div class="flex items-center justify-end gap-3 min-w-[9rem]">
-          <div class="w-10 text-center">Status</div>
-          <div class="w-24 text-right">Actions</div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button
+            class="px-3 py-2 rounded-2xl text-[10px] sm:text-xs bg-white/5 text-white/75 border border-white/15 hover:bg-white/10">
+            Run Full System Scan
+          </button>
+          <a href="new_automation.html"
+             class="px-3.5 sm:px-4 py-2 rounded-2xl text-xs sm:text-sm bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1]
+                    text-black font-semibold shadow-lg shadow-black/40 hover:brightness-110 transition">
+            + New Automation
+          </a>
         </div>
       </div>
 
-      <!-- Row 1: Artwork Intelligence -->
-      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[11px] hover:bg-white/[0.03]">
-        <!-- Left -->
-        <div class="flex items-center flex-1">
-          <!-- Tool -->
-          <div class="w-40">
-            <div class="text-white/90">Artwork Intelligence</div>
-            <div class="text-[9px] text-white/40">
-              Style tags, mood, rarity, subject detection.
+      <!-- STATUS STRIP -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 text-[11px]">
+          <div class="text-white/45 mb-1">Artwork Coverage</div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-xl text-[#00FFD1] font-semibold">82%</span>
+            <span class="text-white/35">have AI pricing &amp; metadata</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 text-[11px]">
+          <div class="text-white/45 mb-1">Collections Intelligence</div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-xl text-[#9B5FFF] font-semibold">6</span>
+            <span class="text-white/35">collections auto-tagged</span>
+          </div>
+        </div>
+        <div class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 text-[11px]">
+          <div class="text-white/45 mb-1">Automations</div>
+          <div class="flex items-baseline gap-2">
+            <span class="text-xl text-[#F5C36A] font-semibold">4</span>
+            <span class="text-white/35">active jobs (on schedule)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOBILE: CARD LIST (xs-sm) -->
+      <section class="space-y-3 md:hidden text-[10px]">
+        <!-- Card 1 -->
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-3.5 flex flex-col gap-2.5">
+          <div class="flex justify-between items-start gap-3">
+            <div>
+              <div class="text-xs font-semibold">Artwork Intelligence</div>
+              <div class="text-[9px] text-white/40">
+                Style tags, mood, rarity, subject detection.
+              </div>
             </div>
-          </div>
-          <!-- Scope -->
-          <div class="w-40 text-white/70">
-            All artworks (auto on new uploads)
-          </div>
-          <!-- Mode -->
-          <div class="w-32">
-            <span class="inline-flex px-2 py-0.5 rounded-full bg-[#00FFD1]/10 text-[#00FFD1] text-[9px]">
-              Continuous
+            <span class="inline-flex px-2 py-0.5 rounded-full bg-[#00FFD1]/10 text-[#00FFD1] text-[8px]">
+              Always-on
             </span>
           </div>
-          <!-- Last Run -->
-          <div class="w-40 text-white/50">
-            2025-11-10  •  34 items processed
+          <div class="text-[9px] text-white/60">
+            Scope: All artworks (auto on new uploads)
           </div>
-          <!-- Output Target -->
-          <div class="w-40 text-white/65">
-            Metadata → Artworks, Collections, Search
+          <div class="text-[8px] text-white/40">
+            Last run: 2025-11-09 • Streaming
           </div>
-        </div>
-        <!-- Right -->
-        <div class="flex items-center justify-end gap-3 min-w-[9rem]">
-          <!-- Status icon -->
-          <div class="w-10 flex justify-center">
-            <div class="h-2 w-2 rounded-full bg-[#00FFD1] shadow-[0_0_8px_#00FFD1]"></div>
+          <div class="text-[8px] text-white/45">
+            Output: Metadata → Artworks, Collections
           </div>
-          <!-- Actions -->
-          <div class="relative inline-block text-left w-24 text-right">
-            <button
-              onclick="toggleToolMenu(event, 'ai-tool-1')"
-              class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15
-                     text-[9px] text-white/75 hover:bg-white/10"
-            >
-              Actions <span class="text-[8px]">▼</span>
+          <div class="flex gap-2 mt-1">
+            <button class="px-2 py-1 rounded-xl bg-white/5 border border-white/10 text-[8px] text-[#00FFD1]">
+              View Map
             </button>
-            <div
-              id="ai-tool-1"
-              class="hidden absolute right-0 mt-1 w-44 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20"
-            >
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
-                Run Now on All Artworks
-              </button>
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
-                Configure Prompts &amp; Weights
-              </button>
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/75 hover:bg-white/5">
-                View Last Report
-              </button>
-            </div>
+            <button class="px-2 py-1 rounded-xl bg-white/5 border border-white/10 text-[8px] text-[#9B5FFF]">
+              Tune
+            </button>
           </div>
         </div>
-      </div>
 
-      <!-- Row 2: AI Pricing Engine -->
-      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[11px] hover:bg-white/[0.03]">
-        <!-- Left -->
-        <div class="flex items-center flex-1">
-          <div class="w-40">
-            <div class="text-white/90">AI Pricing Engine</div>
-            <div class="text-[9px] text-white/40">
-              Suggests floor &amp; premium pricing from traits + market data.
+        <!-- Card 2 -->
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-3.5 flex flex-col gap-2.5">
+          <div class="flex justify-between items-start gap-3">
+            <div>
+              <div class="text-xs font-semibold">AI Pricing Engine</div>
+              <div class="text-[9px] text-white/40">
+                Suggests floor &amp; premium pricing from traits + market data.
+              </div>
             </div>
-          </div>
-          <div class="w-40 text-white/70">
-            Published + candidate works
-          </div>
-          <div class="w-32">
-            <span class="inline-flex px-2 py-0.5 rounded-full bg-white/5 text-white/65 text-[9px]">
+            <span class="inline-flex px-2 py-0.5 rounded-full bg-white/5 text-white/65 text-[8px]">
               Manual + Suggested
             </span>
           </div>
-          <div class="w-40 text-white/50">
-            2025-11-09  •  7 updated
+          <div class="text-[9px] text-white/60">
+            Scope: Published + candidate works
           </div>
-          <div class="w-40 text-white/65">
-            Price suggestions → Dashboard only
+          <div class="text-[8px] text-white/40">
+            Last: 2025-11-09 • 7 updated
           </div>
-        </div>
-        <!-- Right -->
-        <div class="flex items-center justify-end gap-3 min-w-[9rem]">
-          <div class="w-10 flex justify-center">
-            <div class="h-2 w-2 rounded-full bg-[#F5C36A]"></div>
+          <div class="text-[8px] text-white/45">
+            Output: Suggestions → Dashboard only
           </div>
-          <div class="relative inline-block text-left w-24 text-right">
-            <button
-              onclick="toggleToolMenu(event, 'ai-tool-2')"
-              class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15
-                     text-[9px] text-white/75 hover:bg-white/10"
-            >
-              Actions <span class="text-[8px]">▼</span>
+          <div class="flex gap-2 mt-1">
+            <button class="px-2 py-1 rounded-xl bg-white/5 border border-white/10 text-[8px] text-[#00FFD1]">
+              Run Now
             </button>
-            <div
-              id="ai-tool-2"
-              class="hidden absolute right-0 mt-1 w-48 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20"
-            >
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
-                Run Pricing Suggestions
-              </button>
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
-                Adjust Risk / Aggressiveness
-              </button>
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/75 hover:bg-white/5">
-                Export Recommendations
-              </button>
-            </div>
+            <button class="px-2 py-1 rounded-xl bg-white/5 border border-white/10 text-[8px] text-[#9B5FFF]">
+              Adjust Model
+            </button>
           </div>
         </div>
-      </div>
 
-      <!-- Row 3: Auto-Post Orchestrator -->
-      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[11px] hover:bg-white/[0.03]">
-        <div class="flex items-center flex-1">
-          <div class="w-40">
-            <div class="text-white/90">Auto-Post Orchestrator</div>
-            <div class="text-[9px] text-white/40">
-              Generates and schedules posts for new mints &amp; features.
+        <!-- Card 3 -->
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-3.5 flex flex-col gap-2.5">
+          <div class="flex justify-between items-start gap-3">
+            <div>
+              <div class="text-xs font-semibold">Drop Scheduler</div>
+              <div class="text-[9px] text-white/40">
+                Optimizes announcements &amp; releases.
+              </div>
             </div>
-          </div>
-          <div class="w-40 text-white/70">
-            New published + featured collections
-          </div>
-          <div class="w-32">
-            <span class="inline-flex px-2 py-0.5 rounded-full bg-[#00FFD1]/10 text-[#00FFD1] text-[9px]">
-              Active
+            <span class="inline-flex px-2 py-0.5 rounded-full bg-[#9B5FFF]/15 text-[#9B5FFF] text-[8px]">
+              Scheduled
             </span>
           </div>
-          <div class="w-40 text-white/50">
-            2025-11-08  •  3 posts synced
+          <div class="text-[9px] text-white/60">
+            Scope: Collections &amp; hero works
           </div>
-          <div class="w-40 text-white/65">
-            Posts &amp; Drops queue + Social API
+          <div class="text-[8px] text-white/40">
+            Next: 3 drops • as of 2025-11-08
           </div>
-        </div>
-        <div class="flex items-center justify-end gap-3 min-w-[9rem]">
-          <div class="w-10 flex justify-center">
-            <div class="h-2 w-2 rounded-full bg-[#00FFD1]"></div>
+          <div class="text-[8px] text-white/45">
+            Output: Posts → Posts &amp; Drops
           </div>
-          <div class="relative inline-block text-left w-24 text-right">
-            <button
-              onclick="toggleToolMenu(event, 'ai-tool-3')"
-              class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15
-                     text-[9px] text-white/75 hover:bg-white/10"
-            >
-              Actions <span class="text-[8px]">▼</span>
+          <div class="flex gap-2 mt-1">
+            <button class="px-2 py-1 rounded-xl bg-white/5 border border-white/10 text-[8px] text-[#00FFD1]">
+              View Schedule
             </button>
-            <div
-              id="ai-tool-3"
-              class="hidden absolute right-0 mt-1 w-48 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20"
-            >
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
-                Preview Next 7 Days
-              </button>
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
-                Edit Prompt Template
-              </button>
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-red-300 hover:bg-red-500/10">
-                Pause Automation
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 4: Portfolio Insight Engine -->
-      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[11px] hover:bg-white/[0.03]">
-        <div class="flex items-center flex-1">
-          <div class="w-40">
-            <div class="text-white/90">Portfolio Insight Engine</div>
-            <div class="text-[9px] text-white/40">
-              Reads performance across marketplaces; flags underexposed works.
-            </div>
-          </div>
-          <div class="w-40 text-white/70">
-            All live, minted, and featured
-          </div>
-          <div class="w-32">
-            <span class="inline-flex px-2 py-0.5 rounded-full bg-white/5 text-white/65 text-[9px]">
-              Scheduled (Daily)
-            </span>
-          </div>
-          <div class="w-40 text-white/50">
-            2025-11-10  •  2 alerts
-          </div>
-          <div class="w-40 text-white/65">
-            Reports → Email + Dream OS dashboard
-          </div>
-        </div>
-        <div class="flex items-center justify-end gap-3 min-w-[9rem]">
-          <div class="w-10 flex justify-center">
-            <div class="h-2 w-2 rounded-full bg-[#00FFD1]"></div>
-          </div>
-          <div class="relative inline-block text-left w-24 text-right">
-            <button
-              onclick="toggleToolMenu(event, 'ai-tool-4')"
-              class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15
-                     text-[9px] text-white/75 hover:bg-white/10"
-            >
-              Actions <span class="text-[8px]">▼</span>
+            <button class="px-2 py-1 rounded-xl bg-white/5 border border-white/10 text-[8px] text-red-300">
+              Pause
             </button>
-            <div
-              id="ai-tool-4"
-              class="hidden absolute right-0 mt-1 w-52 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20"
-            >
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
-                Run Insights Now
-              </button>
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
-                Configure Alert Thresholds
-              </button>
-              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/80 hover:bg-white/5">
-                View Last Insight Report
-              </button>
-            </div>
           </div>
         </div>
-      </div>
 
-    </div>
+        <!-- Card 4: Custom automations hint -->
+        <div class="rounded-2xl border border-white/10 bg-white/5 p-3.5 text-[9px] text-white/50">
+          Custom automations are managed separately.
+          <a href="new_automation.html" class="text-[#9B5FFF] underline underline-offset-2">
+            Create or edit automations →
+          </a>
+        </div>
+      </section>
 
-    <!-- Bottom: Quick Consoles -->
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-3 text-[10px]">
-      <div class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 space-y-2">
-        <div class="text-white/70 text-[11px] mb-1">One-click: Analyze Artwork</div>
-        <p class="text-white/40">
-          Paste an artwork ID or URL to run metadata, pricing, and post suggestions.
-        </p>
-        <input
-          type="text"
-          placeholder="artwork slug or URL"
-          class="w-full bg-black/40 border border-white/15 rounded-lg px-2 py-1.5 text-[10px] text-white/80
-                 focus:outline-none focus:border-[#00FFD1] focus:ring-1 focus:ring-[#00FFD1]"
-        />
-        <button
-          class="mt-1 px-2 py-1 rounded-lg bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1]
-                 text-[10px] text-black font-semibold w-full"
-        >
-          Run AI Analysis
-        </button>
-      </div>
+      <!-- DESKTOP: TABLE (md+) -->
+      <section class="hidden md:block">
+        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
+          <!-- Header row -->
+          <div class="px-3 py-2 border-b border-white/10 flex items-center justify-between text-[10px] lg:text-[11px] text-white/45">
+            <div class="flex items-center flex-1">
+              <div class="w-40">Tool</div>
+              <div class="w-40">Scope</div>
+              <div class="w-32">Mode</div>
+              <div class="w-40">Last Run</div>
+              <div class="w-40">Output Target</div>
+            </div>
+            <div class="flex items-center justify-end gap-3 min-w-[9rem]">
+              <div class="w-10 text-center">Status</div>
+              <div class="w-24 text-right">Actions</div>
+            </div>
+          </div>
 
-      <div class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 space-y-2">
-        <div class="text-white/70 text-[11px] mb-1">Prompt Template Library</div>
-        <p class="text-white/40">
-          Centralize the language your AI uses for listings, drops, and posts.
-        </p>
-        <button
-          class="mt-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[10px] text-white/75 hover:bg-white/10 w-full"
-        >
-          Open Prompt Library
-        </button>
-      </div>
+          <!-- Row 1 -->
+          <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[10px] lg:text-[11px] hover:bg-white/[0.03]">
+            <div class="flex items-center flex-1">
+              <div class="w-40">
+                <div class="text-white/90">Artwork Intelligence</div>
+                <div class="text-[9px] text-white/40">
+                  Style tags, mood, rarity, subject detection.
+                </div>
+              </div>
+              <div class="w-40 text-white/70">
+                All artworks (auto on new uploads)
+              </div>
+              <div class="w-32">
+                <span class="inline-flex px-2 py-0.5 rounded-full bg-[#00FFD1]/10 text-[#00FFD1] text-[9px]">
+                  Always-on
+                </span>
+              </div>
+              <div class="w-40 text-white/50">
+                2025-11-09 • Streaming
+              </div>
+              <div class="w-40 text-white/65">
+                Metadata → Artworks, Collections
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-3 min-w-[9rem]">
+              <div class="w-10 flex justify-center">
+                <div class="h-2.5 w-2.5 rounded-full bg-[#00FFD1]"></div>
+              </div>
+              <div class="relative inline-block text-left w-24 text-right">
+                <button
+                  onclick="toggleRowMenu(event, 'ai-tool-1')"
+                  class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/80 hover:bg-white/10">
+                  Manage <span class="text-[8px]">▼</span>
+                </button>
+                <div
+                  id="ai-tool-1"
+                  class="hidden absolute right-0 mt-1 w-48 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20">
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
+                    View Intelligence Map
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                    Adjust Sensitivity
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/75 hover:bg-white/5">
+                    Export to CSV
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <div class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 space-y-2">
-        <div class="text-white/70 text-[11px] mb-1">Safety &amp; Overrides</div>
-        <p class="text-white/40">
-          Approvals, manual review, and constraints for any AI-driven action.
-        </p>
-        <button
-          class="mt-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[10px] text-red-300/90 hover:bg-red-500/10 w-full"
-        >
-          Review Pending Actions
-        </button>
+          <!-- Row 2 -->
+          <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[10px] lg:text-[11px] hover:bg-white/[0.03]">
+            <div class="flex items-center flex-1">
+              <div class="w-40">
+                <div class="text-white/90">AI Pricing Engine</div>
+                <div class="text-[9px] text-white/40">
+                  Suggests floor &amp; premium pricing from traits + market data.
+                </div>
+              </div>
+              <div class="w-40 text-white/70">
+                Published + candidate works
+              </div>
+              <div class="w-32">
+                <span class="inline-flex px-2 py-0.5 rounded-full bg-white/5 text-white/65 text-[9px]">
+                  Manual + Suggested
+                </span>
+              </div>
+              <div class="w-40 text-white/50">
+                2025-11-09 • 7 updated
+              </div>
+              <div class="w-40 text-white/65">
+                Price suggestions → Dashboard only
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-3 min-w-[9rem]">
+              <div class="w-10 flex justify-center">
+                <div class="h-2.5 w-2.5 rounded-full bg-[#F5C36A]"></div>
+              </div>
+              <div class="relative inline-block text-left w-24 text-right">
+                <button
+                  onclick="toggleRowMenu(event, 'ai-tool-2')"
+                  class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/80 hover:bg-white/10">
+                  Manage <span class="text-[8px]">▼</span>
+                </button>
+                <div
+                  id="ai-tool-2"
+                  class="hidden absolute right-0 mt-1 w-48 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20">
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
+                    Run Pricing Suggestions
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                    Adjust Risk / Aggressiveness
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/75 hover:bg-white/5">
+                    Export Recommendations
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[10px] lg:text-[11px] hover:bg-white/[0.03]">
+            <div class="flex items-center flex-1">
+              <div class="w-40">
+                <div class="text-white/90">Drop Scheduler</div>
+                <div class="text-[9px] text-white/40">
+                  Optimizes announcements &amp; releases.
+                </div>
+              </div>
+              <div class="w-40 text-white/70">
+                Collections &amp; hero works
+              </div>
+              <div class="w-32">
+                <span class="inline-flex px-2 py-0.5 rounded-full bg-[#9B5FFF]/15 text-[#9B5FFF] text-[9px]">
+                  Scheduled
+                </span>
+              </div>
+              <div class="w-40 text-white/50">
+                2025-11-08 • Next: 3 drops
+              </div>
+              <div class="w-40 text-white/65">
+                Posts → Posts &amp; Drops
+              </div>
+            </div>
+            <div class="flex items-center justify-end gap-3 min-w-[9rem]">
+              <div class="w-10 flex justify-center">
+                <div class="h-2.5 w-2.5 rounded-full bg-[#00FFD1]"></div>
+              </div>
+              <div class="relative inline-block text-left w-24 text-right">
+                <button
+                  onclick="toggleRowMenu(event, 'ai-tool-3')"
+                  class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/80 hover:bg-white/10">
+                  Manage <span class="text-[8px]">▼</span>
+                </button>
+                <div
+                  id="ai-tool-3"
+                  class="hidden absolute right-0 mt-1 w-48 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20">
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
+                    View Upcoming Drops
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                    Tune Schedule Model
+                  </button>
+                  <button class="w-full text-left px-3 py-1.5 text-[9px] text-red-300 hover:bg-red-500/10">
+                    Pause Scheduler
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="px-3 py-2 border-t border-white/5 text-[10px] lg:text-[11px] text-white/50">
+            Custom automations are managed separately.
+            <a href="new_automation.html" class="text-[#9B5FFF] underline underline-offset-2">
+              Create or edit automations →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SIDE INFO GRID -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-[10px]">
+        <div class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 space-y-1.5">
+          <div class="text-white/70 text-[11px] mb-1">Automation Logging</div>
+          <p class="text-white/40">
+            All AI actions are logged for auditability. View recent runs, inputs, and outputs.
+          </p>
+          <button
+            class="mt-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[10px] text-white/75 hover:bg-white/10">
+            Open Logs
+          </button>
+        </div>
+
+        <div class="rounded-2xl bg:white/5 border border-white/10 px-4 py-3 space-y-1.5">
+          <div class="text-white/70 text-[11px] mb-1">Prompt Template Library</div>
+          <p class="text-white/40">
+            Centralize the language your AI uses for listings, drops, and posts.
+          </p>
+          <button
+            class="mt-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[10px] text-white/75 hover:bg-white/10 w-full">
+            Open Prompt Library
+          </button>
+        </div>
+
+        <div class="rounded-2xl bg-white/5 border border-white/10 px-4 py-3 space-y-1.5">
+          <div class="text-white/70 text-[11px] mb-1">Safety &amp; Overrides</div>
+          <p class="text-white/40">
+            Configure blocked terms, manual overrides, and escalation rules for AI outputs.
+          </p>
+          <button
+            class="mt-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[10px] text-white/75 hover:bg-white/10 w-full">
+            Review Safety Settings
+          </button>
+        </div>
       </div>
-    </section>
-  </main>
+    </main>
+  </div>
 
   <script>
-    function toggleToolMenu(event, id) {
+    // Mobile nav shared
+    const navOverlay = document.getElementById('nav-overlay');
+    const navPanel = document.getElementById('nav-panel');
+
+    function openNavMenu() {
+      navOverlay.classList.remove('pointer-events-none');
+      navOverlay.style.opacity = '1';
+      navPanel.classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
+      navPanel.classList.add('pointer-events-auto', 'opacity-100', 'scale-100');
+    }
+    function closeNavMenu() {
+      navOverlay.style.opacity = '0';
+      navOverlay.classList.add('pointer-events-none');
+      navPanel.classList.add('pointer-events-none', 'opacity-0', 'scale-95');
+      navPanel.classList.remove('pointer-events-auto', 'opacity-100', 'scale-100');
+    }
+    function toggleNavMenu() {
+      const isOpen = navPanel.classList.contains('pointer-events-auto');
+      isOpen ? closeNavMenu() : openNavMenu();
+    }
+
+    // Active nav (desktop + mobile)
+    (function setActiveNav() {
+      const current = document.body.dataset.section;
+      document.querySelectorAll('.nav-link').forEach(link => {
+        const key = link.dataset.nav;
+        if (!key) return;
+        if (key === current) {
+          link.classList.add('bg-[#9B5FFF]/20', 'text-[#9B5FFF]');
+        } else {
+          link.classList.add('text-white/65', 'hover:bg-white/5', 'hover:text-white');
+        }
+      });
+    })();
+
+    // Desktop row dropdown menus
+    function toggleRowMenu(event, id) {
       event.stopPropagation();
       const menu = document.getElementById(id);
-      const all = document.querySelectorAll("[id^='ai-tool-']");
-      all.forEach(m => {
-        if (m !== menu) m.classList.add("hidden");
-      });
+      document
+        .querySelectorAll("[id^='ai-tool-']")
+        .forEach(m => { if (m !== menu) m.classList.add("hidden"); });
       menu.classList.toggle("hidden");
     }
 
@@ -398,6 +507,13 @@
       document
         .querySelectorAll("[id^='ai-tool-']")
         .forEach(m => m.classList.add("hidden"));
+    });
+
+    // Close overlays with ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeNavMenu();
+      }
     });
   </script>
 </body>
