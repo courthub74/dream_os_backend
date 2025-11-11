@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dream OS — Collections</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-[#05060A] text-white flex">
+  <!-- Sidebar -->
+  <aside class="w-60 bg-white/5 border-r border-white/10 backdrop-blur-xl flex flex-col">
+    <div class="px-5 py-4 flex items-center gap-2 border-b border-white/10">
+      <div class="h-7 w-7 rounded-full bg-gradient-to-br from-[#9B5FFF] to-[#00FFD1]"></div>
+      <div>
+        <div class="text-xs uppercase text-white/40 tracking-[0.18em]">Dream OS</div>
+        <div class="text-[9px] text-white/45">Command Console</div>
+      </div>
+    </div>
+
+    <nav class="flex-1 px-3 py-3 text-xs space-y-1">
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        Artworks
+      </a>
+      <a href="#" class="block px-3 py-2 rounded-xl bg-[#9B5FFF]/20 text-[#9B5FFF]">
+        Collections
+      </a>
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        Posts &amp; Drops
+      </a>
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        AI Tools
+      </a>
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">
+        Settings
+      </a>
+    </nav>
+
+    <button
+      class="m-3 mb-4 px-3 py-2 text-[10px] rounded-xl bg-white/5 text-white/50 hover:bg-red-500/10 hover:text-red-300 transition"
+    >
+      Logout
+    </button>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 p-6">
+    <!-- Header -->
+    <div class="flex items-baseline justify-between gap-3 mb-4">
+      <div>
+        <h1 class="text-lg font-semibold text-white">Collections</h1>
+        <p class="text-[12px] text-white/45">
+          Group, stage, and feature series across the Dream Agent universe.
+        </p>
+      </div>
+      <button
+        class="px-3 py-1.5 rounded-xl text-[12px] bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1] text-black font-semibold shadow-lg shadow-black/40"
+      >
+        + New Collection
+      </button>
+    </div>
+
+    <!-- Table Card -->
+    <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
+      <!-- Header row -->
+      <div class="px-3 py-2 border-b border-white/10 flex items-center justify-between text-[12px] text-white/45">
+        <!-- Left group -->
+        <div class="flex items-center flex-1">
+          <div class="w-40">Name</div>
+          <div class="w-40">Slug</div>
+          <div class="w-20">Artworks</div>
+          <div class="w-24">Status</div>
+          <div class="w-24">Featured</div>
+          <div class="w-40">Last Updated</div>
+        </div>
+        <!-- Right group -->
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <div class="w-8 text-center">AI</div>
+          <div class="w-24 text-right">Actions</div>
+        </div>
+      </div>
+
+      <!-- Row 1: Live + Featured -->
+      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[12px] hover:bg-white/[0.03]">
+        <!-- Left -->
+        <div class="flex items-center flex-1">
+          <div class="w-40 truncate">
+            <span class="text-white/90">Symbols in Motion</span>
+          </div>
+          <div class="w-40 text-white/40 truncate">
+            /collections/symbols-in-motion
+          </div>
+          <div class="w-20 text-white/80">
+            18
+          </div>
+          <div class="w-24">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-[#00FFD1]/15 text-[#00FFD1]">
+              Live
+            </span>
+          </div>
+          <div class="w-24">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-[#9B5FFF]/20 text-[#9B5FFF]">
+              Featured
+            </span>
+          </div>
+          <div class="w-40 text-white/45">
+            2025-10-02  •  Curated
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <!-- AI -->
+          <div class="w-8 flex justify-center">
+            <svg class="w-4 h-4 text-green-400" viewBox="0 0 24 24" fill="currentColor">
+              <title>Analyzed — Ready</title>
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
+          </div>
+
+          <!-- Actions -->
+          <div class="relative inline-block text-left w-24 text-right">
+            <button
+              onclick="toggleMenu(event, 'col-menu-1')"
+              class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/75 hover:bg-white/10"
+            >
+              Actions <span class="text-[8px]">▼</span>
+            </button>
+            <div
+              id="col-menu-1"
+              class="hidden absolute right-0 mt-1 w-44 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20"
+            >
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/90 hover:bg-white/5">
+                View Collection
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                Edit Details
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/35 cursor-not-allowed" disabled>
+                Set as Featured (Already)
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-red-300/90 hover:bg-red-500/10">
+                Archive Collection
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Draft -->
+      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[12px] hover:bg-white/[0.03]">
+        <!-- Left -->
+        <div class="flex items-center flex-1">
+          <div class="w-40 truncate">
+            <span class="text-white/90">Signals &amp; Ascensions</span>
+          </div>
+          <div class="w-40 text-white/40 truncate">
+            /collections/signals-ascensions
+          </div>
+          <div class="w-20 text-white/80">
+            9
+          </div>
+          <div class="w-24">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-white/55">
+              Draft
+            </span>
+          </div>
+          <div class="w-24 text-white/35">
+            Not featured
+          </div>
+          <div class="w-40 text-white/45">
+            2025-09-21  •  Updated
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <div class="w-8 flex justify-center">
+            <svg class="w-4 h-4 text-white/30" viewBox="0 0 24 24" fill="currentColor">
+              <title>Not analyzed</title>
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
+          </div>
+          <div class="relative inline-block text-left w-24 text-right">
+            <button
+              onclick="toggleMenu(event, 'col-menu-2')"
+              class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/75 hover:bg-white/10"
+            >
+              Actions <span class="text-[8px]">▼</span>
+            </button>
+            <div
+              id="col-menu-2"
+              class="hidden absolute right-0 mt-1 w-44 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20"
+            >
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/90 hover:bg-white/5">
+                View Collection
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                Edit Details
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
+                Set as Featured
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/35 cursor-not-allowed" disabled>
+                Archive (No artworks)
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: Live, Not Featured -->
+      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[12px] hover:bg-white/[0.03]">
+        <!-- Left -->
+        <div class="flex items-center flex-1">
+          <div class="w-40 truncate">
+            <span class="text-white/90">Industrial Scriptures</span>
+          </div>
+          <div class="w-40 text-white/40 truncate">
+            /collections/industrial-scriptures
+          </div>
+          <div class="w-20 text-white/80">
+            6
+          </div>
+          <div class="w-24">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-[#00FFD1]/15 text-[#00FFD1]">
+              Live
+            </span>
+          </div>
+          <div class="w-24 text-white/35">
+            Not featured
+          </div>
+          <div class="w-40 text-white/45">
+            2025-08-03  •  Synced
+          </div>
+        </div>
+
+        <!-- Right -->
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <div class="w-8 flex justify-center">
+            <svg class="w-4 h-4 text-green-400" viewBox="0 0 24 24" fill="currentColor">
+              <title>Analyzed — Ready</title>
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+            </svg>
+          </div>
+          <div class="relative inline-block text-left w-24 text-right">
+            <button
+              onclick="toggleMenu(event, 'col-menu-3')"
+              class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/75 hover:bg-white/10"
+            >
+              Actions <span class="text-[8px]">▼</span>
+            </button>
+            <div
+              id="col-menu-3"
+              class="hidden absolute right-0 mt-1 w-44 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20"
+            >
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/90 hover:bg-white/5">
+                View Collection
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">
+                Edit Details
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">
+                Set as Featured
+              </button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-red-300/90 hover:bg-red-500/10">
+                Archive Collection
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu(event, id) {
+      event.stopPropagation();
+      const menu = document.getElementById(id);
+      const all = document.querySelectorAll("[id^='col-menu-']");
+      all.forEach(m => { if (m !== menu) m.classList.add("hidden"); });
+      menu.classList.toggle("hidden");
+    }
+    document.addEventListener("click", () => {
+      document.querySelectorAll("[id^='col-menu-']").forEach(m => m.classList.add("hidden"));
+    });
+  </script>
+</body>
+</html>
