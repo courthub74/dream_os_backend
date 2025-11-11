@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dream OS — Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-[#05060A] text-white flex">
+  <!-- Sidebar -->
+  <aside class="w-60 bg-white/5 border-r border-white/10 backdrop-blur-xl flex flex-col">
+    <div class="px-5 py-4 flex items-center gap-2 border-b border-white/10">
+      <div class="h-7 w-7 rounded-full bg-gradient-to-br from-[#9B5FFF] to-[#00FFD1]"></div>
+      <div>
+        <div class="text-xs uppercase text-white/40 tracking-[0.18em]">Dream OS</div>
+        <div class="text-[9px] text-white/45">Command Console</div>
+      </div>
+    </div>
+
+    <nav class="flex-1 px-3 py-3 text-xs space-y-1">
+      <a href="#" class="block px-3 py-2 rounded-xl bg-[#9B5FFF]/20 text-[#9B5FFF]">Artworks</a>
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">Collections</a>
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">Posts &amp; Drops</a>
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">AI Tools</a>
+      <a href="#" class="block px-3 py-2 rounded-xl text-white/60 hover:bg-white/5 hover:text-white">Settings</a>
+    </nav>
+
+    <button class="m-3 mb-4 px-3 py-2 text-[10px] rounded-xl bg-white/5 text-white/50 hover:bg-red-500/10 hover:text-red-300 transition">Logout</button>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 p-6">
+    <div class="flex items-baseline justify-between gap-3 mb-4">
+      <div>
+        <h1 class="text-lg font-semibold text-white">Artworks</h1>
+        <p class="text-[12px] text-white/45">Draft, publish, and mint works across the Dream Agent universe.</p>
+      </div>
+      <button class="px-3 py-1.5 rounded-xl text-[12px] bg-gradient-to-r from-[#9B5FFF] to-[#00FFD1] text-black font-semibold shadow-lg shadow-black/40">
+        + New Artwork
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl overflow-hidden">
+      <!-- Header -->
+      <div class="px-3 py-2 border-b border-white/10 flex items-center justify-between text-[12px] text-white/45">
+        <div class="flex items-center flex-1">
+          <div class="w-40">Title</div>
+          <div class="w-24">Status</div>
+          <div class="w-24">Price</div>
+          <div class="w-20">Chain</div>
+          <div class="w-40">Marketplace</div>
+          <div class="w-32">Collection</div>
+        </div>
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <div class="w-8 text-center">AI</div>
+          <div class="w-24 text-right">Actions</div>
+        </div>
+      </div>
+
+      <!-- Row 1 -->
+      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[12px] hover:bg-white/[0.03]">
+        <div class="flex items-center flex-1">
+          <div class="w-40 truncate">
+            <span class="text-white/90">Temple of Openings</span>
+            <span class="block text-[10px] text-white/35">/art/temple-of-openings</span>
+          </div>
+          <div class="w-24">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-[#00FFD1]/15 text-[#00FFD1]">Published</span>
+          </div>
+          <div class="w-24 text-white/70">320 USD</div>
+          <div class="w-20 text-white/60">XRPL</div>
+          <div class="w-40 text-white/60 truncate">
+            <a href="#" class="underline underline-offset-2 decoration-[#00FFD1]/60 hover:text-[#00FFD1]">View on XRP Café</a>
+          </div>
+          <div class="w-32 text-white/70 truncate">Symbols in Motion</div>
+        </div>
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <div class="w-8 flex justify-center">
+            <button id="process_check-row-1" class="process_check" data-ready="true" aria-label="AI process status">
+              <svg class="w-4 h-4 text-green-400" viewBox="0 0 24 24" fill="currentColor">
+                <title>Analyzed — Ready</title>
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+              </svg>
+            </button>
+          </div>
+          <div class="relative inline-block text-left w-24 text-right">
+            <button onclick="toggleMenu(event, 'menu-row-1')" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/70 hover:bg-white/10">
+              Actions <span class="text-[8px]">▼</span>
+            </button>
+            <div id="menu-row-1" class="hidden absolute right-0 mt-1 w-40 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20">
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/80 hover:bg-white/5">View</button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/35 cursor-not-allowed" disabled>Post to Front End (Live)</button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/35 cursor-not-allowed" disabled>Mint NFT (Already Minted)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[12px] hover:bg-white/[0.03]">
+        <div class="flex items-center flex-1">
+          <div class="w-40 truncate">
+            <span class="text-white/90">Signals &amp; Ascensions #07</span>
+            <span class="block text-[10px] text-white/35">/art/signals-ascensions-07</span>
+          </div>
+          <div class="w-24">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-white/5 text-white/50">Draft</span>
+          </div>
+          <div class="w-24 text-white/40">—</div>
+          <div class="w-20 text-white/25">—</div>
+          <div class="w-40 text-white/25">Not minted</div>
+          <div class="w-32 text-white/60 truncate">Signals &amp; Ascensions</div>
+        </div>
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <div class="w-8 flex justify-center">
+            <button id="process_check-row-2" class="process_check" data-ready="false" aria-label="AI process status">
+              <svg class="w-4 h-4 text-white/30" viewBox="0 0 24 24" fill="currentColor">
+                <title>Not analyzed</title>
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+              </svg>
+            </button>
+          </div>
+          <div class="relative inline-block text-left w-24 text-right">
+            <button onclick="toggleMenu(event, 'menu-row-2')" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/70 hover:bg-white/10">
+              Actions <span class="text-[8px]">▼</span>
+            </button>
+            <div id="menu-row-2" class="hidden absolute right-0 mt-1 w-40 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20">
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/80 hover:bg-white/5">View</button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#9B5FFF] hover:bg-[#9B5FFF]/10">Post to Front End</button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/35 cursor-not-allowed" disabled>Mint NFT (Requires Publish)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="px-3 py-2 border-t border-white/5 flex items-center justify-between text-[12px] hover:bg-white/[0.03]">
+        <div class="flex items-center flex-1">
+          <div class="w-40 truncate">
+            <span class="text-white/90">Industrial Scriptures</span>
+            <span class="block text-[10px] text-white/35">/art/industrial-scriptures</span>
+          </div>
+          <div class="w-24">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] bg-[#00FFD1]/15 text-[#00FFD1]">Published</span>
+          </div>
+          <div class="w-24 text-white/70">450 USD</div>
+          <div class="w-20 text-white/25">—</div>
+          <div class="w-40 text-white/25">Not minted</div>
+          <div class="w-32 text-white/70 truncate">Industrial Scriptures</div>
+        </div>
+        <div class="flex items-center justify-end gap-3 min-w-[8rem]">
+          <div class="w-8 flex justify-center">
+            <button id="process_check-row-3" class="process_check" data-ready="false" aria-label="AI process status">
+              <svg class="w-4 h-4 text-white/30" viewBox="0 0 24 24" fill="currentColor">
+                <title>Not analyzed</title>
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+              </svg>
+            </button>
+          </div>
+          <div class="relative inline-block text-left w-24 text-right">
+            <button onclick="toggleMenu(event, 'menu-row-3')" class="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-white/5 border border-white/15 text-[9px] text-white/70 hover:bg-white/10">
+              Actions <span class="text-[8px]">▼</span>
+            </button>
+            <div id="menu-row-3" class="hidden absolute right-0 mt-1 w-40 rounded-xl bg-[#05060A] border border-white/10 shadow-xl z-20">
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/80 hover:bg-white/5">View</button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-white/35 cursor-not-allowed" disabled>Post to Front End (Already Live)</button>
+              <button class="w-full text-left px-3 py-1.5 text-[9px] text-[#00FFD1] hover:bg-[#00FFD1]/10">Mint NFT</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleMenu(event, id) {
+      event.stopPropagation();
+      const menu = document.getElementById(id);
+      const allMenus = document.querySelectorAll("[id^='menu-row-']");
+      allMenus.forEach(m => {
+        if (m !== menu) m.classList.add("hidden");
+      });
+      menu.classList.toggle("hidden");
+    }
+
+    document.addEventListener("click", () => {
+      const allMenus = document.querySelectorAll("[id^='menu-row-']");
+      allMenus.forEach(m => m.classList.add("hidden"));
+    });
+
+    function updateProcessChecks() {
+      document.querySelectorAll('.process_check').forEach(el => {
+        const ready = el.dataset.ready === 'true';
+        const svg = el.querySelector('svg');
+        if (!svg) return;
+        if (ready) {
+          svg.classList.remove('text-white/30');
+          svg.classList.add('text-green-400');
+          const t = svg.querySelector('title'); if (t) t.textContent = 'Analyzed — Ready';
+          el.setAttribute('aria-checked', 'true');
+        } else {
+          svg.classList.remove('text-green-400');
+          svg.classList.add('text-white/30');
+          const t = svg.querySelector('title'); if (t) t.textContent = 'Not analyzed';
+          el.setAttribute('aria-checked', 'false');
+        }
+      });
+    }
+
+    function setProcessCheck(id, ready) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.dataset.ready = ready ? 'true' : 'false';
+      updateProcessChecks();
+    }
+
+    updateProcessChecks();
+  </script>
+</body>
+</html>
