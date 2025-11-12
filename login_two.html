@@ -34,20 +34,15 @@
       0%, 100% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.1); opacity: 0.8; }
     }
-      .orb-wrap{position:relative;}
-    .orbit-ring{position:absolute;top:50%;left:50%;width:120px;height:120px;border:1px solid rgba(0,229,255,0.35);border-radius:50%;transform:translate(-50%,-50%);animation:orbit 12s linear infinite;box-shadow:0 0 12px rgba(0,229,255,0.15) inset}
-    .orbit-ring.ring-2{width:140px;height:140px;border-color:rgba(0,229,255,0.18);animation-duration:18s}
-    @keyframes orbit{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
-    .fade-out{animation:fadeOut 0.8s ease forwards}
-    @keyframes fadeOut{to{opacity:0;filter:blur(4px)}}
-    /* Loading overlay */
-    .loading-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);z-index:50}
-    .loading-overlay.show{display:flex}
+    .orb-wrap { position: relative; }
+    .orbit-ring { position: absolute; top: 50%; left: 50%; width: 120px; height: 120px; border: 1px solid rgba(0,229,255,0.35); border-radius: 50%; transform: translate(-50%,-50%); animation: orbit 12s linear infinite; box-shadow: 0 0 12px rgba(0,229,255,0.15) inset; }
+    .orbit-ring.ring-2 { width: 140px; height: 140px; border-color: rgba(0,229,255,0.18); animation-duration: 18s; }
+    @keyframes orbit { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+    .fade-out { animation: fadeOut 0.8s ease forwards; }
+    @keyframes fadeOut { to { opacity: 0; filter: blur(4px); } }
+    .loading-overlay { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.7); backdrop-filter: blur(12px); z-index: 50; }
+    .loading-overlay.show { display: flex; }
   </style>
-  <!-- PWA meta -->
-  <meta name="theme-color" content="#0E1624">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body class="flex flex-col items-center justify-center h-screen text-center">
   <div class="orb-wrap mb-8">
@@ -57,17 +52,13 @@
   </div>
   <h1 class="text-4xl font-[Playfair_Display] glow-text tracking-wide mb-4">Dream OS</h1>
   <p class="text-gray-300 text-sm mb-8">Operate the Dream — Access the Neural Core</p>
-  
+
   <div class="glass p-8 rounded-2xl w-80">
     <input type="text" placeholder="Username" class="w-full mb-4 px-4 py-2 rounded bg-black/30 border border-white/10 focus:border-cyan-400 outline-none">
     <input type="password" placeholder="Password" class="w-full mb-6 px-4 py-2 rounded bg-black/30 border border-white/10 focus:border-cyan-400 outline-none">
     <button id="loginBtn" class="w-full py-2 rounded bg-gradient-to-r from-[#0057B8] to-[#00E5FF] font-semibold hover:opacity-90 transition">Login</button>
   </div>
 
-  <!-- Install prompt -->
-  <button id="installBtn" class="mt-4 px-4 py-2 rounded border border-white/15 text-sm text-cyan-200 hover:bg-white/10 hidden">Install Dream OS</button>
-
-  <!-- Loading overlay -->
   <div id="loading" class="loading-overlay">
     <div class="text-center">
       <div class="relative mx-auto mb-6" style="width:96px;height:96px">
@@ -79,6 +70,7 @@
   </div>
 
   <footer class="absolute bottom-6 text-xs text-gray-500">© Dream Agent Systems — 2025</footer>
+
   <script>
     const btn = document.getElementById('loginBtn');
     const overlay = document.getElementById('loading');
@@ -89,6 +81,7 @@
       'Handshaking with Neural Core…',
       'Loading dashboard…'
     ];
+
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       btn.disabled = true;
@@ -104,116 +97,12 @@
           clearInterval(timer);
           loadingText.textContent = 'Welcome, Agent.';
           document.body.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = 'dash_two.html'; // redirect
+          }, 800);
         }
       }, 900);
     });
   </script>
-
-<!-- PWA: manifest + service worker + install prompt -->
-<script>
-  // 1) Generate icons dynamically so this single HTML works standalone
-  function makeIcon(size){
-    const c=document.createElement('canvas'); c.width=c.height=size; const g=c.getContext('2d');
-    const grd=g.createLinearGradient(0,0,size,size);
-    grd.addColorStop(0,'#0057B8'); grd.addColorStop(1,'#00E5FF');
-    g.fillStyle=grd; g.fillRect(0,0,size,size);
-    // central orb
-    g.beginPath(); g.arc(size/2,size/2,size*0.26,0,Math.PI*2); g.fillStyle='rgba(255,255,255,0.2)'; g.fill();
-    return c.toDataURL('image/png');
-  }
-
-  const icons=[192,256,384,512].map(s=>({src:makeIcon(s), sizes:`${s}x${s}`, type:'image/png', purpose:'any maskable'}));
-
-  // 2) Build a manifest at runtime and attach it
-  const manifest = {
-    name: 'Dream OS',
-    short_name: 'Dream OS',
-    description: 'Operate the Dream — Access the Neural Core',
-    start_url: '/backroom',
-    scope: '/',
-    display: 'standalone',
-    background_color: '#0E1624',
-    theme_color: '#0E1624',
-    icons
-  };
-  const blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
-  const manifestURL = URL.createObjectURL(blob);
-  const link = document.createElement('link');
-  link.rel = 'manifest';
-  link.href = manifestURL;
-  document.head.appendChild(link);
-
-  // 3) Service Worker code: cache shell; network-first for API
-  const swCode = `
-    const CACHE = 'dreamos-v1';
-    const ASSETS = [ '/', location.href ];
-    self.addEventListener('install', e=>{
-      e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));
-      self.skipWaiting();
-    });
-    self.addEventListener('activate', e=>{
-      e.waitUntil(self.clients.claim());
-    });
-    self.addEventListener('fetch', e=>{
-      const url = new URL(e.request.url);
-      if (url.pathname.startsWith('/api') || url.hostname.includes('api.')) {
-        // network-first for dynamic data
-        e.respondWith(
-          fetch(e.request).then(r=>{
-            return r;
-          }).catch(()=>caches.match(e.request))
-        );
-      } else {
-        // cache-first for shell/assets
-        e.respondWith(
-          caches.match(e.request).then(cached=>
-            cached || fetch(e.request).then(resp=>{
-              const copy = resp.clone();
-              caches.open(CACHE).then(c=>c.put(e.request, copy));
-              return resp;
-            })
-          )
-        );
-      }
-    });
-  `;
-  const swBlob = new Blob([swCode], {type:'text/javascript'});
-  const swURL = URL.createObjectURL(swBlob);
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register(swURL);
-  }
-
-  // 4) Install prompt handling
-  let deferredPrompt;
-  const installBtn = document.getElementById('installBtn');
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    installBtn.classList.remove('hidden');
-  });
-  installBtn?.addEventListener('click', async () => {
-    installBtn.disabled = true;
-    try {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        await deferredPrompt.userChoice;
-      }
-    } finally {
-      installBtn.classList.add('hidden');
-      deferredPrompt = null;
-    }
-  });
-
-  // 5) iOS add-to-home-screen hint (no beforeinstallprompt on iOS Safari)
-  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
-  if (isIOS && !isStandalone) {
-    const hint = document.createElement('div');
-    hint.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 px-3 py-2 text-xs bg-black/60 border border-white/10 rounded text-gray-200';
-    hint.textContent = 'To install: Share → Add to Home Screen';
-    document.body.appendChild(hint);
-    setTimeout(()=>hint.remove(), 8000);
-  }
-</script>
 </body>
 </html>
